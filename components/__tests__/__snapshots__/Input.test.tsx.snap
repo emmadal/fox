@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputComponent render correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "alignItems": "center",
+        "borderColor": "#f0932b",
+        "borderRadius": 10,
+        "borderWidth": 2,
+        "flex": 1,
+        "flexDirection": "row",
+        "height": 50,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      {
+        "backgroundColor": "#f0932b",
+        "borderBottomLeftRadius": 10,
+        "borderTopStartRadius": 10,
+        "height": 50,
+        "justifyContent": "center",
+        "marginLeft": -1,
+        "paddingHorizontal": 7,
+      }
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "color": "#11181C",
+          },
+          {
+            "fontSize": 16,
+            "lineHeight": 24,
+          },
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          {
+            "color": "#fff",
+          },
+        ]
+      }
+    >
+      username
+    </Text>
+  </View>
+  <TextInput
+    aria-label="username"
+    autoCapitalize="none"
+    secureTextEntry={false}
+    selectionColor="#f0932b"
+    style={
+      [
+        {
+          "flex": 2,
+          "fontSize": 18,
+          "lineHeight": 23,
+          "paddingHorizontal": 5,
+          "textAlign": "auto",
+        },
+        {
+          "color": "#11181C",
+        },
+      ]
+    }
+    underlineColorAndroid="transparent"
+  />
+</View>
+`;

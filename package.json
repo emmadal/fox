@@ -8,11 +8,25 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "test": "jest --watch --coverage=false",
+    "testDebug": "jest -o --watch --coverage=false",
+    "testFinal": "jest",
+    "updateSnapshots": "jest -u --coverage=false"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.setup.js"
+    ]
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
@@ -37,6 +51,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@testing-library/react-native": "^12.5.1",
     "@types/jest": "^29.5.12",
     "@types/react": "~18.2.45",
     "@types/react-test-renderer": "^18.0.7",
