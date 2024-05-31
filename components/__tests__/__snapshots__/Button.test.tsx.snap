@@ -37,14 +37,12 @@ exports[`ButtonComponent render correctly 1`] = `
     [
       {
         "alignItems": "center",
-        "backgroundColor": "#f0932b",
+        "backgroundColor": "#C96E28",
         "borderColor": "transparent",
-        "borderRadius": 5,
+        "borderRadius": 10,
         "borderWidth": 0,
-        "flex": 1,
         "flexDirection": "row",
         "justifyContent": "center",
-        "maxWidth": "50%",
         "padding": 8.5,
       },
       undefined,

@@ -10,5 +10,13 @@
   "login": "Login",
   "register": "Créer un nouveau compte",
   "password": "Mot de passe",
-  "emaillog": "Email, nom d'utilisateur"
+  "email": "Email",
+  "phone": "Numéro téléphone",
+  "birth_date": "Date de naissance",
+  "rulesprivacy": "",
+  "username": "Nom d'utilisateur",
+  "privacypolicy": "Politique de confidentialité",
+  "alreadyaccount": "Déjà sur Fox ?",
+  "cookies": "les cookies",
+  "and": "et"
 }

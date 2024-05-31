@@ -6,10 +6,9 @@ exports[`InputComponent render correctly 1`] = `
     [
       {
         "alignItems": "center",
-        "borderColor": "#f0932b",
-        "borderRadius": 10,
+        "borderColor": "#C96E28",
+        "borderRadius": 40,
         "borderWidth": 2,
-        "flex": 1,
         "flexDirection": "row",
         "height": 50,
       },
@@ -20,9 +19,9 @@ exports[`InputComponent render correctly 1`] = `
   <View
     style={
       {
-        "backgroundColor": "#f0932b",
-        "borderBottomLeftRadius": 10,
-        "borderTopStartRadius": 10,
+        "backgroundColor": "#C96E28",
+        "borderBottomLeftRadius": 40,
+        "borderTopStartRadius": 40,
         "height": 50,
         "justifyContent": "center",
         "marginLeft": -1,
@@ -57,12 +56,13 @@ exports[`InputComponent render correctly 1`] = `
     aria-label="username"
     autoCapitalize="none"
     secureTextEntry={false}
-    selectionColor="#f0932b"
+    selectionColor="#C96E28"
     style={
       [
         {
+          "backgroundColor": "transparent",
           "flex": 2,
-          "fontSize": 18,
+          "fontSize": 17,
           "lineHeight": 23,
           "paddingHorizontal": 5,
           "textAlign": "auto",

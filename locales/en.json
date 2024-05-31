@@ -9,6 +9,14 @@
   "errorlogin": "Email, username or password incorrect",
   "login": "Login",
   "register": "Create new account",
+  "phone": "Phone number",
+  "birth_date": "Birth date",
   "password": "Password",
-  "email": "Email"
+  "email": "Email",
+  "rulesprivacy": "By joining fox, you agree to our",
+  "cookies": "Cookies",
+  "and": "and",
+  "username": "Username",
+  "privacypolicy": "Privacy Policy",
+  "alreadyaccount": "Already on Fox?"
 }
