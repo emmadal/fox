@@ -1,4 +1,14 @@
 {
-    "CFBundleDisplayName": "Fox",
-    "login": "Se connecter"
+  "CFBundleDisplayName": "Fox",
+  "signin": "Connexion",
+  "foxdesc": "Restez en contact, discutez et partagez vos sensations",
+  "forgotpassword": "Mot de passe oublié ?",
+  "joinnow": "S'inscrire",
+  "newtofox": "Nouveau sur Fox ?",
+  "fieldrequired": "Champ obligatoire",
+  "errorlogin": "Email, nom d'utilisateur ou mot de passe incorrect",
+  "login": "Login",
+  "register": "Créer un nouveau compte",
+  "password": "Mot de passe",
+  "emaillog": "Email, nom d'utilisateur"
 }

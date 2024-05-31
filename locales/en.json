@@ -1,4 +1,14 @@
 {
   "CFBundleDisplayName": "Fox",
-  "login": "Login"
+  "signin": "Sign in",
+  "foxdesc": "Stay connected, Discuss and Share your feelings",
+  "forgotpassword": "Forgot Password?",
+  "joinnow": "Join Now",
+  "newtofox": "New to Fox?",
+  "fieldrequired": "Field required",
+  "errorlogin": "Email, username or password incorrect",
+  "login": "Login",
+  "register": "Create new account",
+  "password": "Password",
+  "email": "Email"
 }
