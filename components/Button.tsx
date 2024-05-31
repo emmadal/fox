@@ -42,7 +42,7 @@ const Button: React.FC<Props> = ({
       aria-label={title}
       role="button"
       android_ripple={{
-        radius: 95,
+        // radius: 50,
         color: "white",
         borderless: false,
       }}
@@ -67,13 +67,11 @@ const Button: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   button: {
-    flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    borderRadius: 5,
+    borderRadius: 10,
     borderWidth: 0,
     borderColor: "transparent",
-    maxWidth: "50%",
     backgroundColor: Colors.primaryColor,
     justifyContent: "center",
     padding: 8.5,

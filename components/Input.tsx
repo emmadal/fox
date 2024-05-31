@@ -67,13 +67,12 @@ export function Input({ label, value, secure, placeholder, style, ...rest }: Pro
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     height: 50,
     borderWidth: 2,
     borderColor: Colors.primaryColor,
-    borderRadius: 10,
+    borderRadius: 40,
   },
   label: {
     color: "#fff",
@@ -82,16 +81,17 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryColor,
     justifyContent: "center",
     paddingHorizontal: 7,
-    borderTopStartRadius: 10,
-    borderBottomLeftRadius: 10,
+    borderTopStartRadius: 40,
+    borderBottomLeftRadius: 40,
     marginLeft: -1,
     height: 50,
   },
   input: {
     flex: 2,
     textAlign: "auto",
-    fontSize: 18,
+    fontSize: 17,
     lineHeight: 23,
     paddingHorizontal: 5,
+    backgroundColor: "transparent",
   },
 });
