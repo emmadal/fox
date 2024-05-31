@@ -18,5 +18,8 @@
   "and": "and",
   "username": "Username",
   "privacypolicy": "Privacy Policy",
-  "alreadyaccount": "Already on Fox?"
+  "alreadyaccount": "Already on Fox?",
+  "findfoxaccount": "Find your Fox account",
+  "findfoxaccountdesc": "Enter the email you have used to create your account to change your password",
+  "resetpassword": "Reset password"
 }

@@ -18,5 +18,8 @@
   "privacypolicy": "Politique de confidentialité",
   "alreadyaccount": "Déjà sur Fox ?",
   "cookies": "les cookies",
-  "and": "et"
+  "and": "et",
+  "findfoxaccount": "Retrouvez votre compte Fox",
+  "findfoxaccountdesc": "Entrez l'email que vous avez utilisé pour créer votre compte pour changer votre mot de passe",
+  "resetpassword": "Réinitialiser"
 }

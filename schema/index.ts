@@ -12,3 +12,7 @@ export const registerSchema = z.object({
   birth_date: z.string().trim(),
   password: z.string().min(5, "min 5 characters").trim(),
 });
+
+export const resetPasswordSchema = z.object({
+  email: z.string().email().trim(),
+});
