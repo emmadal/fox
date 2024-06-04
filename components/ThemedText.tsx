@@ -37,24 +37,29 @@ const styles = StyleSheet.create({
   default: {
     fontSize: 16,
     lineHeight: 24,
+    fontFamily: "MaximaNouva",
   },
   defaultSemiBold: {
     fontSize: 16,
     lineHeight: 24,
-    fontWeight: '600',
+    fontWeight: "600",
+    fontFamily: "MaximaNouva",
   },
   title: {
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     lineHeight: 32,
+    fontFamily: "MaximaNouva",
   },
   subtitle: {
     fontSize: 19,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+    fontFamily: "MaximaNouva",
   },
   link: {
     lineHeight: 30,
     fontSize: 16,
-    color: '#0a7ea4',
+    color: "#0a7ea4",
+    fontFamily: "MaximaNouva",
   },
 });
