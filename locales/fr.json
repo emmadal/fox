@@ -6,7 +6,7 @@
   "joinnow": "S'inscrire",
   "newtofox": "Nouveau sur Fox ?",
   "fieldrequired": "Champ obligatoire",
-  "errorlogin": "Email, nom d'utilisateur ou mot de passe incorrect",
+  "errorcredentials": "Email ou mot de passe incorrect",
   "login": "Login",
   "register": "Créer un nouveau compte",
   "password": "Mot de passe",

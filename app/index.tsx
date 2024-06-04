@@ -9,6 +9,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Dimensions,
+  Alert,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { loginSchema } from "@/schema";
@@ -18,6 +19,8 @@ import Button from "@/components/Button";
 import z from "zod";
 import i18n from "@/i18n";
 import { Link } from "expo-router";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "@/api";
 
 type Inputs = z.infer<typeof loginSchema>;
 const blurhash =
@@ -27,6 +30,7 @@ const Page = () => {
   const {
     handleSubmit,
     control,
+    setError,
     formState: { errors, isLoading, isSubmitting },
   } = useForm<Inputs>({
     mode: "onChange",
@@ -34,8 +38,25 @@ const Page = () => {
     reValidateMode: "onChange",
   });
 
-  const handleForm = (input: Inputs) => {
-    console.log(input);
+  const mutation = useMutation({
+    mutationFn: async (input: Inputs) => {
+      const response = await login(input);
+      return response;
+    },
+    onSuccess: (data) => {
+      if (!data.status) {
+        setError("root", {
+          message: data.message,
+        });
+      }
+    },
+    onError: (error, variables, context) => {
+      console.log(error.message);
+    },
+  });
+
+  const handleForm = async (input: Inputs) => {
+    mutation.mutate({ ...input });
   };
 
   return (
@@ -116,9 +137,16 @@ const Page = () => {
           <Button
             title={i18n.t("login")}
             onPress={handleSubmit(handleForm)}
-            loading={isSubmitting || isLoading}
+            loading={mutation.isPending || isSubmitting || isLoading}
+            disabled={mutation.isPending || isSubmitting || isLoading}
             style={styles.btn}
           />
+
+          {(mutation.isError && mutation?.error) || errors.root?.message ? (
+            <ThemedText type="default" style={styles.errorlogin}>
+              {i18n.t("errorcredentials")}
+            </ThemedText>
+          ) : null}
 
           <ThemedText type="defaultSemiBold" style={styles.footer}>
             {i18n.t("newtofox")}{" "}
@@ -167,6 +195,12 @@ const styles = StyleSheet.create({
     width: 130,
     aspectRatio: 1,
     borderRadius: 100,
+  },
+  errorlogin: {
+    color: "red",
+    fontSize: 15,
+    marginTop: 10,
+    textAlign: "center",
   },
 });
 

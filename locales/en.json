@@ -6,7 +6,7 @@
   "joinnow": "Join Now",
   "newtofox": "New to Fox?",
   "fieldrequired": "Field required",
-  "errorlogin": "Email, username or password incorrect",
+  "errorcredentials": "email or password incorrect",
   "login": "Login",
   "register": "Create new account",
   "phone": "Phone number",
