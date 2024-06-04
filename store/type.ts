@@ -12,4 +12,5 @@ export type InitState = {
   user: User;
   token: string | null;
   isSignout: boolean;
+  language: string;
 };

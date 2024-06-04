@@ -33,6 +33,7 @@ export const useStore = create(
           isSignout: false,
         })),
       signOut: () => set(initialState),
+      updateLanguage: (language) => set((state) => ({ ...state, language })),
     }),
     {
       name: "fox_str",

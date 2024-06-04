@@ -5,7 +5,9 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "fox",
+    "owner": "Emmanuel Dalougou",
+    "description": "Fox is a social media app where people are connected together, discuss and Share their feelings",
     "jsEngine": "hermes",
     "userInterfaceStyle": "automatic",
     "splash": {
