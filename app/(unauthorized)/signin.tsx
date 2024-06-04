@@ -26,7 +26,7 @@ type Inputs = z.infer<typeof loginSchema>;
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
-const Index = () => {
+const SignIn = () => {
   const fn = useStore((state) => state);
   const {
     handleSubmit,
@@ -208,4 +208,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Index;
+export default SignIn;
