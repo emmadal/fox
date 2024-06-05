@@ -21,5 +21,8 @@
   "alreadyaccount": "Already on Fox?",
   "findfoxaccount": "Find your Fox account",
   "findfoxaccountdesc": "Enter the email you have used to create your account to change your password",
-  "resetpassword": "Reset password"
+  "resetpassword": "Reset password",
+  "getstarted": "Get Started",
+  "onboardingdesc": "Like, comment, and share to engage with others in the community. Explore trending topics, follow your favorite creators, and discover new content tailored to your interests.",
+  "onboardingtitle": "Engage with the Community"
 }

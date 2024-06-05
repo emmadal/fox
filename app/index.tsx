@@ -1,172 +1,75 @@
 import React from "react";
+import { StyleSheet, Dimensions, Platform, useColorScheme } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Image } from "expo-image";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  Keyboard,
-  TouchableWithoutFeedback,
-  Dimensions,
-} from "react-native";
-import { useForm, Controller } from "react-hook-form";
-import { loginSchema } from "@/schema";
 import { ThemedText } from "@/components/ThemedText";
-import { Input } from "@/components/Input";
 import Button from "@/components/Button";
-import z from "zod";
 import i18n from "@/i18n";
 import { Link, router } from "expo-router";
-import { useMutation } from "@tanstack/react-query";
-import { login } from "@/api";
-import { useStore } from "@/store";
 
-type Inputs = z.infer<typeof loginSchema>;
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 const Index = () => {
-  const fn = useStore((state) => state);
-  const {
-    handleSubmit,
-    control,
-    setError,
-    formState: { errors, isLoading, isSubmitting },
-  } = useForm<Inputs>({
-    mode: "onChange",
-    resolver: zodResolver(loginSchema),
-    reValidateMode: "onChange",
-  });
-
-  const mutation = useMutation({
-    mutationFn: async (input: Inputs) => {
-      const response = await login(input);
-      return response;
-    },
-    onSuccess: (data) => {
-      if (!data.status) {
-        setError("root", {
-          message: data.message,
-        });
-      }
-      fn.updateToken(data.data?.token);
-      fn.updateProfile(data.data?.user);
-      router.replace("/home");
-    },
-    onError: (error, variables, context) => {
-      console.log(error.message);
-    },
-  });
-
-  const handleForm = async (input: Inputs) => {
-    mutation.mutate({ ...input });
-  };
-
+  const colorScheme = useColorScheme();
+  const image =
+    colorScheme === "light"
+      ? require("@/assets/images/people.svg")
+      : require("@/assets/images/people_light.svg");
   return (
-    <KeyboardAvoidingView
-      style={styles.keyboard}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ThemedView lightColor="transparent" style={styles.container}>
-          <Image
-            style={styles.image}
-            source={require("@/assets/images/icon.png")}
-            placeholder={{ blurhash }}
-            contentFit="cover"
-            transition={1000}
-            alt="logo"
-            aria-label="logo"
-            cachePolicy="memory"
-          />
-          <ThemedView
-            lightColor="transparent"
-            darkColor="transparent"
-            style={styles.header}
-          >
-            <ThemedText type="title">{i18n.t("signin")}</ThemedText>
-            <ThemedText type="default">{i18n.t("foxdesc")}</ThemedText>
-          </ThemedView>
-          <ThemedView
-            lightColor="transparent"
-            darkColor="transparent"
-            style={styles.viewInput}
-          >
-            <Controller
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  label={i18n.t("email")}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="email"
-            />
-            <ThemedText type="default" style={styles.error}>
-              {errors?.email?.message}
-            </ThemedText>
-          </ThemedView>
-          <ThemedView
-            lightColor="transparent"
-            darkColor="transparent"
-            style={styles.viewInput}
-          >
-            <Controller
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  label={i18n.t("password")}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  secure
-                />
-              )}
-              name="password"
-            />
-            <ThemedText style={styles.error} type="default">
-              {errors?.password?.message}
-            </ThemedText>
-          </ThemedView>
-          <ThemedText type="defaultSemiBold" style={styles.forgot}>
-            <ThemedText type="link">
-              <Link href="/forgot">{i18n.t("forgotpassword")}</Link>
-            </ThemedText>
+    <ThemedView lightColor="transparent" style={styles.container}>
+      <Image
+        style={styles.image}
+        source={image}
+        placeholder={{ blurhash }}
+        contentFit="cover"
+        transition={1000}
+        alt="people"
+        aria-label="logo"
+        cachePolicy="memory"
+      />
+      <ThemedView
+        lightColor="transparent"
+        darkColor="transparent"
+        style={styles.header}
+      >
+        <ThemedText type="subtitle" style={styles.title}>
+          {i18n.t("onboardingtitle")}
+        </ThemedText>
+        <ThemedText type="default" style={styles.subtitle}>
+          {i18n.t("onboardingdesc")}
+        </ThemedText>
+      </ThemedView>
+      <ThemedView
+        lightColor="transparent"
+        darkColor="transparent"
+        style={styles.bottom}
+      >
+        <ThemedText type="defaultSemiBold">
+          <ThemedText type="link">
+            <Link href="/signin">{i18n.t("signin")}</Link>
           </ThemedText>
-          <Button
-            title={i18n.t("login")}
-            onPress={handleSubmit(handleForm)}
-            loading={mutation.isPending || isSubmitting || isLoading}
-            disabled={mutation.isPending || isSubmitting || isLoading}
-            style={styles.btn}
-          />
+        </ThemedText>
 
-          {(mutation.isError && mutation?.error) || errors.root?.message ? (
-            <ThemedText type="default" style={styles.errorlogin}>
-              {i18n.t("errorcredentials")}
-            </ThemedText>
-          ) : null}
-
-          <ThemedText type="defaultSemiBold" style={styles.footer}>
-            {i18n.t("newtofox")}{" "}
-            <ThemedText type="link">
-              <Link href="/register">{i18n.t("register")}</Link>
-            </ThemedText>
-          </ThemedText>
-        </ThemedView>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+        <Button
+          title={i18n.t("getstarted")}
+          onPress={() => router.navigate("/register")}
+          style={styles.btn}
+        />
+      </ThemedView>
+    </ThemedView>
   );
 };
 
 const styles = StyleSheet.create({
-  keyboard: {
-    flex: 1,
+  title: {
+    lineHeight: 40,
+    fontWeight: "bold",
+    marginTop: 28,
+  },
+  subtitle: {
+    marginTop: 20,
+    lineHeight: 30,
   },
   container: {
     flex: 1,
@@ -177,34 +80,25 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     backgroundColor: "transparent",
   },
-  error: {
-    color: "red",
-    fontSize: 15,
-  },
   header: {
     marginBottom: 20,
   },
+  bottom: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 20,
+  },
   btn: {
-    alignSelf: "center",
-    width: Dimensions.get("window").width / 1.8,
+    width: Dimensions.get("window").width / 2.3,
   },
   footer: {
     marginTop: 50,
   },
-  forgot: {
-    marginBottom: 30,
-  },
   image: {
-    height: 130,
-    width: 130,
     aspectRatio: 1,
-    borderRadius: 100,
-  },
-  errorlogin: {
-    color: "red",
-    fontSize: 15,
-    marginTop: 10,
-    textAlign: "center",
+    height: 280,
+    alignSelf: "center",
   },
 });
 

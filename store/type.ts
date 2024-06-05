@@ -5,6 +5,7 @@ export type User = {
   biography: string;
   photo: string;
   email: string;
+  certified: boolean;
   birth_date: string;
 };
 

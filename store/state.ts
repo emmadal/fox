@@ -8,6 +8,7 @@ export const initialState: InitState = {
     username: "",
     birth_date: "",
     biography: "",
+    certified: false,
     photo: "",
   },
   token: null,

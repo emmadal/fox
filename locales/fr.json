@@ -21,5 +21,8 @@
   "and": "et",
   "findfoxaccount": "Retrouvez votre compte Fox",
   "findfoxaccountdesc": "Entrez l'email que vous avez utilisé pour créer votre compte pour changer votre mot de passe",
-  "resetpassword": "Réinitialiser"
+  "resetpassword": "Réinitialiser",
+  "getstarted": "Démarrer",
+  "onboardingdesc": "Likez, commentez et partagez pour échanger avec les autres membres de la communauté. Explorez les sujets à la mode, suivez vos créateurs préférés et découvrez de nouveaux contenus adaptés à vos centres d'intérêt.",
+  "onboardingtitle": "S'engager auprès de la communauté"
 }
