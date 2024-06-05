@@ -1,4 +1,4 @@
-import React from "react";
+import React, { startTransition } from "react";
 import { ThemedView } from "@/components/ThemedView";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Image } from "expo-image";
@@ -32,6 +32,7 @@ const SignIn = () => {
     handleSubmit,
     control,
     setError,
+    reset,
     formState: { errors, isLoading, isSubmitting },
   } = useForm<Inputs>({
     mode: "onChange",
@@ -49,10 +50,14 @@ const SignIn = () => {
         setError("root", {
           message: data.message,
         });
+        return;
       }
-      fn.updateToken(data.data?.token);
-      fn.updateProfile(data.data?.user);
-      router.replace("/home");
+      startTransition(() => {
+        reset();
+        fn.updateToken(data.data?.token);
+        fn.updateProfile(data.data?.user);
+        router.replace("/home");
+      });
     },
     onError: (error, variables, context) => {
       console.log(error.message);

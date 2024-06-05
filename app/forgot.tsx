@@ -97,7 +97,7 @@ const Forget = () => {
           <ThemedText type="defaultSemiBold" style={styles.footer}>
             {i18n.t("alreadyaccount")}{" "}
             <ThemedText type="link">
-              <Link href="/">{i18n.t("signin")}</Link>
+              <Link href="/signin">{i18n.t("signin")}</Link>
             </ThemedText>
           </ThemedText>
         </ThemedView>

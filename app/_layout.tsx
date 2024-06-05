@@ -6,7 +6,7 @@ import {
 } from "@react-navigation/native";
 import type { AppStateStatus } from "react-native";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import "react-native-reanimated";
 import { AppState, Platform } from "react-native";
@@ -49,6 +49,11 @@ export default function RootLayout() {
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
+      if (session.isSignout || !session.token) {
+        router.replace("/");
+      } else {
+        router.replace("/home");
+      }
     }
   }, [loaded]);
 
@@ -60,7 +65,6 @@ export default function RootLayout() {
     <QueryClientProvider client={client}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(unauthorized)" />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>

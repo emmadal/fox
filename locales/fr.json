@@ -11,6 +11,7 @@
   "register": "Créer un nouveau compte",
   "password": "Mot de passe",
   "email": "Email",
+  "full_name": "Nom complet",
   "phone": "Numéro téléphone",
   "birth_date": "Date de naissance",
   "rulesprivacy": "",

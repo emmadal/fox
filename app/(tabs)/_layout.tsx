@@ -10,10 +10,10 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
   const session = useStore((state) => state);
 
-  if (!session.isSignout || !session.token) {
+  if (session.isSignout || !session.token) {
     // On web, static rendering will stop here as the user is not authenticated
     // in the headless Node process that the pages are rendered in.
-    return <Redirect href="/signin" />;
+    return <Redirect key="signin" href="/signin" />;
   }
 
   return (

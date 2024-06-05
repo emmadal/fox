@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { startTransition, useState } from "react";
 import { ThemedView } from "@/components/ThemedView";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Image } from "expo-image";
@@ -10,6 +10,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Dimensions,
+  Alert,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { registerSchema } from "@/schema";
@@ -24,19 +25,25 @@ import DateTimePicker, {
 } from "@react-native-community/datetimepicker";
 
 import { ExternalLink } from "@/components/ExternalLink";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { useMutation } from "@tanstack/react-query";
+import { register } from "@/api";
+import { useStore } from "@/store";
 
 type Inputs = z.infer<typeof registerSchema>;
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 const Page = () => {
+  const fn = useStore((state) => state);
   const [date, setDate] = useState<Date>(new Date(1960, 0, 1));
   const [show, setShow] = useState(false);
   const {
     handleSubmit,
     control,
     setValue,
+    setError,
+    reset,
     formState: { errors, isLoading, isSubmitting },
   } = useForm<Inputs>({
     mode: "onChange",
@@ -48,12 +55,12 @@ const Page = () => {
     event: DateTimePickerEvent,
     selectedDate: Date | undefined,
   ) => {
-    const currentDate = selectedDate;
-    setDate(currentDate!);
-    setValue("birth_date", currentDate?.toLocaleDateString("fr")!);
+    setDate(selectedDate!);
+    setValue("birth_date", selectedDate?.toLocaleDateString("fr")!);
     setShow(false);
   };
 
+  // Android date picker
   const showAndroidDate = () => {
     DateTimePickerAndroid.open({
       testID: "datePicker",
@@ -67,8 +74,37 @@ const Page = () => {
     });
   };
 
+  // send data to the API
+  const mutation = useMutation({
+    mutationFn: async (input: Inputs) => {
+      const response = await register(input);
+      return response;
+    },
+    onSuccess: async (data) => {
+      if (!data.status) {
+        Alert.alert(data.message);
+        setError("root", {
+          message: data.message,
+        });
+        return;
+      }
+      startTransition(() => {
+        reset();
+        fn.updateToken(data.data?.token);
+        fn.updateProfile(data.data?.user);
+        router.replace("/home");
+      });
+    },
+    onError: (error, variables, context) => {
+      Alert.alert(error.message);
+    },
+  });
+
   const handleForm = (input: Inputs) => {
-    console.log(input);
+    mutation.mutate({
+      ...input,
+      birth_date: date,
+    });
   };
 
   return (
@@ -95,6 +131,28 @@ const Page = () => {
           >
             <ThemedText type="title">{i18n.t("joinnow")}</ThemedText>
             <ThemedText type="default">{i18n.t("foxdesc")}</ThemedText>
+          </ThemedView>
+          <ThemedView
+            lightColor="transparent"
+            darkColor="transparent"
+            style={styles.viewInput}
+          >
+            <Controller
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input
+                  label={i18n.t("full_name")}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+              name="full_name"
+            />
+            <ThemedText type="default" style={styles.error}>
+              {errors?.full_name?.message}
+            </ThemedText>
           </ThemedView>
           <ThemedView
             lightColor="transparent"
@@ -219,13 +277,15 @@ const Page = () => {
           <Button
             title={i18n.t("joinnow")}
             onPress={handleSubmit(handleForm)}
-            loading={isSubmitting || isLoading}
+            loading={mutation.isPending || isSubmitting || isLoading}
+            disabled={mutation.isPending || isSubmitting || isLoading}
             style={styles.btn}
           />
+
           <ThemedText type="defaultSemiBold" style={styles.footer}>
             {i18n.t("alreadyaccount")}{" "}
             <ThemedText type="link">
-              <Link href="/">{i18n.t("signin")}</Link>
+              <Link href="/signin">{i18n.t("signin")}</Link>
             </ThemedText>
           </ThemedText>
         </ThemedView>
@@ -242,12 +302,12 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: Platform.select({
-      ios: 65,
-      android: 33,
+      ios: 45,
+      android: 28,
     }),
   },
   viewInput: {
-    marginVertical: 5,
+    marginVertical: 3,
     backgroundColor: "transparent",
   },
   error: {
@@ -262,15 +322,21 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width / 1.8,
   },
   terms: {
-    marginBottom: 25,
+    marginBottom: 23,
   },
   footer: {
-    marginTop: 35,
+    marginTop: 25,
     textAlign: "right",
   },
   image: {
     height: 100,
     width: 100,
+  },
+  errorsignup: {
+    color: "red",
+    fontSize: 15,
+    marginTop: 10,
+    textAlign: "center",
   },
 });
 
