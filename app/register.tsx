@@ -11,6 +11,7 @@ import {
   TouchableWithoutFeedback,
   Dimensions,
   Alert,
+  ScrollView,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { registerSchema } from "@/schema";
@@ -112,184 +113,190 @@ const Page = () => {
       style={styles.keyboard}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ThemedView lightColor="transparent" style={styles.container}>
-          <Image
-            style={styles.image}
-            source={require("@/assets/images/icon.png")}
-            placeholder={{ blurhash }}
-            contentFit="cover"
-            transition={1000}
-            alt="logo"
-            aria-label="logo"
-            cachePolicy="memory"
-          />
-          <ThemedView
-            lightColor="transparent"
-            darkColor="transparent"
-            style={styles.header}
-          >
-            <ThemedText type="title">{i18n.t("joinnow")}</ThemedText>
-            <ThemedText type="default">{i18n.t("foxdesc")}</ThemedText>
-          </ThemedView>
-          <ThemedView
-            lightColor="transparent"
-            darkColor="transparent"
-            style={styles.viewInput}
-          >
-            <Controller
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  label={i18n.t("full_name")}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="full_name"
+      <ScrollView
+        style={styles.scroll}
+        contentInsetAdjustmentBehavior="automatic"
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.ContainerStyle}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <ThemedView lightColor="transparent" style={styles.container}>
+            <Image
+              style={styles.image}
+              source={require("@/assets/images/icon.png")}
+              placeholder={{ blurhash }}
+              contentFit="cover"
+              transition={1000}
+              alt="logo"
+              aria-label="logo"
+              cachePolicy="memory"
             />
-            <ThemedText type="default" style={styles.error}>
-              {errors?.full_name?.message}
-            </ThemedText>
-          </ThemedView>
-          <ThemedView
-            lightColor="transparent"
-            darkColor="transparent"
-            style={styles.viewInput}
-          >
-            <Controller
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  label={i18n.t("email")}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="email"
-            />
-            <ThemedText type="default" style={styles.error}>
-              {errors?.email?.message}
-            </ThemedText>
-          </ThemedView>
-          <ThemedView
-            lightColor="transparent"
-            darkColor="transparent"
-            style={styles.viewInput}
-          >
-            <Controller
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  label={i18n.t("username")}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="username"
-            />
-            <ThemedText type="default" style={styles.error}>
-              {errors?.username?.message}
-            </ThemedText>
-          </ThemedView>
-          <ThemedView
-            lightColor="transparent"
-            darkColor="transparent"
-            style={styles.viewInput}
-          >
-            <Controller
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  label={i18n.t("birth_date")}
-                  onBlur={onBlur}
-                  // onChangeText={onChange}
-                  value={value}
-                  onPress={() => {
-                    Platform.select({
-                      android: showAndroidDate(),
-                      ios: setShow(!show),
-                    });
-                  }}
-                />
-              )}
-              name="birth_date"
-            />
-            {show && Platform.OS === "ios" ? (
-              <DateTimePicker
-                testID="datePicker"
-                value={date}
-                mode="date"
-                is24Hour={true}
-                onChange={onChangeDate}
-                display="spinner"
-                locale={getLocales()[0]?.languageCode || "en"}
+            <ThemedView
+              lightColor="transparent"
+              darkColor="transparent"
+              style={styles.header}
+            >
+              <ThemedText type="title">{i18n.t("joinnow")}</ThemedText>
+              <ThemedText type="default">{i18n.t("foxdesc")}</ThemedText>
+            </ThemedView>
+            <ThemedView
+              lightColor="transparent"
+              darkColor="transparent"
+              style={styles.viewInput}
+            >
+              <Controller
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Input
+                    label={i18n.t("full_name")}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="full_name"
               />
-            ) : null}
-            <ThemedText type="default" style={styles.error}>
-              {errors?.birth_date?.message}
-            </ThemedText>
-          </ThemedView>
-          <ThemedView
-            lightColor="transparent"
-            darkColor="transparent"
-            style={styles.viewInput}
-          >
-            <Controller
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  label={i18n.t("password")}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  secure
+              <ThemedText type="default" style={styles.error}>
+                {errors?.full_name?.message}
+              </ThemedText>
+            </ThemedView>
+            <ThemedView
+              lightColor="transparent"
+              darkColor="transparent"
+              style={styles.viewInput}
+            >
+              <Controller
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Input
+                    label={i18n.t("email")}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="email"
+              />
+              <ThemedText type="default" style={styles.error}>
+                {errors?.email?.message}
+              </ThemedText>
+            </ThemedView>
+            <ThemedView
+              lightColor="transparent"
+              darkColor="transparent"
+              style={styles.viewInput}
+            >
+              <Controller
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Input
+                    label={i18n.t("username")}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="username"
+              />
+              <ThemedText type="default" style={styles.error}>
+                {errors?.username?.message}
+              </ThemedText>
+            </ThemedView>
+            <ThemedView
+              lightColor="transparent"
+              darkColor="transparent"
+              style={styles.viewInput}
+            >
+              <Controller
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Input
+                    label={i18n.t("birth_date")}
+                    onBlur={onBlur}
+                    value={value}
+                    onPress={() => {
+                      Platform.select({
+                        android: showAndroidDate(),
+                        ios: setShow(!show),
+                      });
+                    }}
+                  />
+                )}
+                name="birth_date"
+              />
+              {show && Platform.OS === "ios" ? (
+                <DateTimePicker
+                  testID="datePicker"
+                  value={date}
+                  mode="date"
+                  is24Hour={true}
+                  onChange={onChangeDate}
+                  display="spinner"
+                  locale={getLocales()[0]?.languageCode || "en"}
                 />
-              )}
-              name="password"
+              ) : null}
+              <ThemedText type="default" style={styles.error}>
+                {errors?.birth_date?.message}
+              </ThemedText>
+            </ThemedView>
+            <ThemedView
+              lightColor="transparent"
+              darkColor="transparent"
+              style={styles.viewInput}
+            >
+              <Controller
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Input
+                    label={i18n.t("password")}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    secure
+                  />
+                )}
+                name="password"
+              />
+              <ThemedText style={styles.error} type="default">
+                {errors?.password?.message}
+              </ThemedText>
+            </ThemedView>
+            <ThemedText type="defaultSemiBold" style={styles.terms}>
+              {i18n.t("rulesprivacy")}{" "}
+              <ThemedText type="link">
+                <ExternalLink href="https://docs.expo.dev/router/introduction">
+                  <ThemedText type="link">{i18n.t("privacypolicy")}</ThemedText>
+                </ExternalLink>
+              </ThemedText>{" "}
+              {i18n.t("and")}{" "}
+              <ThemedText type="link">
+                <ExternalLink href="https://docs.expo.dev/router/introduction">
+                  <ThemedText type="link">{i18n.t("cookies")}</ThemedText>
+                </ExternalLink>
+              </ThemedText>
+            </ThemedText>
+            <Button
+              title={i18n.t("joinnow")}
+              onPress={handleSubmit(handleForm)}
+              loading={mutation.isPending || isSubmitting || isLoading}
+              disabled={mutation.isPending || isSubmitting || isLoading}
+              style={styles.btn}
             />
-            <ThemedText style={styles.error} type="default">
-              {errors?.password?.message}
+
+            <ThemedText type="defaultSemiBold" style={styles.footer}>
+              {i18n.t("alreadyaccount")}{" "}
+              <ThemedText type="link">
+                <Link href="/signin">{i18n.t("signin")}</Link>
+              </ThemedText>
             </ThemedText>
           </ThemedView>
-          <ThemedText type="defaultSemiBold" style={styles.terms}>
-            {i18n.t("rulesprivacy")}{" "}
-            <ThemedText type="link">
-              <ExternalLink href="https://docs.expo.dev/router/introduction">
-                <ThemedText type="link">{i18n.t("privacypolicy")}</ThemedText>
-              </ExternalLink>
-            </ThemedText>{" "}
-            {i18n.t("and")}{" "}
-            <ThemedText type="link">
-              <ExternalLink href="https://docs.expo.dev/router/introduction">
-                <ThemedText type="link">{i18n.t("cookies")}</ThemedText>
-              </ExternalLink>
-            </ThemedText>
-          </ThemedText>
-          <Button
-            title={i18n.t("joinnow")}
-            onPress={handleSubmit(handleForm)}
-            loading={mutation.isPending || isSubmitting || isLoading}
-            disabled={mutation.isPending || isSubmitting || isLoading}
-            style={styles.btn}
-          />
-
-          <ThemedText type="defaultSemiBold" style={styles.footer}>
-            {i18n.t("alreadyaccount")}{" "}
-            <ThemedText type="link">
-              <Link href="/signin">{i18n.t("signin")}</Link>
-            </ThemedText>
-          </ThemedText>
-        </ThemedView>
-      </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
@@ -298,12 +305,18 @@ const styles = StyleSheet.create({
   keyboard: {
     flex: 1,
   },
+  scroll: {
+    flex: 1,
+  },
+  ContainerStyle: {
+    flexGrow: 1,
+  },
   container: {
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: Platform.select({
-      ios: 45,
-      android: 28,
+      ios: 55,
+      android: 30,
     }),
   },
   viewInput: {
@@ -325,7 +338,7 @@ const styles = StyleSheet.create({
     marginBottom: 23,
   },
   footer: {
-    marginTop: 25,
+    marginVertical: 25,
     textAlign: "right",
   },
   image: {
