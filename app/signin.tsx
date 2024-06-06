@@ -56,7 +56,11 @@ const SignIn = () => {
         reset();
         fn.updateToken(data.data?.token);
         fn.updateProfile(data.data?.user);
-        router.replace("/home");
+        if (data?.data?.user?.biography) {
+          router.replace("/home");
+          return;
+        }
+        router.replace("/bio");
       });
     },
     onError: (error, variables, context) => {

@@ -25,5 +25,12 @@
   "resetpassword": "Reset password",
   "getstarted": "Get Started",
   "onboardingdesc": "Like, comment, and share to engage with others in the community. Explore trending topics, follow your favorite creators, and discover new content tailored to your interests.",
-  "onboardingtitle": "Engage with the Community"
+  "onboardingtitle": "Engage with the Community",
+  "home": "Home",
+  "profile": "Profile",
+  "intro": "Let’s begin the adventure",
+  "introdesc": "Hello! Looks like you’re enjoying on Fox, but you haven’t describe yourself.",
+  "next": "Next",
+  "skipnow": "Skip for now",
+  "yourbio": "Your biography"
 }

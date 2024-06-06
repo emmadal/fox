@@ -57,6 +57,7 @@ exports[`ButtonComponent render correctly 1`] = `
           "color": "#11181C",
         },
         {
+          "fontFamily": "MaximaNouva",
           "fontSize": 16,
           "lineHeight": 24,
         },

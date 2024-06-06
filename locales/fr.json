@@ -25,5 +25,12 @@
   "resetpassword": "Réinitialiser",
   "getstarted": "Démarrer",
   "onboardingdesc": "Likez, commentez et partagez pour échanger avec les autres membres de la communauté. Explorez les sujets à la mode, suivez vos créateurs préférés et découvrez de nouveaux contenus adaptés à vos centres d'intérêt.",
-  "onboardingtitle": "S'engager auprès de la communauté"
+  "onboardingtitle": "S'engager auprès de la communauté",
+  "home": "Accueil",
+  "profile": "Profil",
+  "intro": "Débutons l'aventure",
+  "introdesc": "Bonjour ! On dirait que vous vous amusez sur Fox, mais vous ne vous êtes pas décrit.",
+  "next": "Suivant",
+  "skipnow": "Passer à autre chose",
+  "yourbio": "Votre biographie"
 }

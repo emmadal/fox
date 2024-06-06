@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputComponent render correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#fff",
+      },
+      [
+        {
+          "borderColor": "#C96E28",
+          "borderRadius": 5,
+          "borderWidth": 1,
+        },
+        undefined,
+      ],
+    ]
+  }
+>
+  <TextInput
+    aria-label="biography"
+    autoCapitalize="none"
+    autoFocus={true}
+    maxLength={200}
+    multiline={true}
+    numberOfLines={5}
+    placeholder="biography"
+    placeholderTextColor="#11181C"
+    selectionColor="#C96E28"
+    style={
+      [
+        {
+          "backgroundColor": "transparent",
+          "fontSize": 15,
+          "height": 100,
+          "lineHeight": 23,
+          "paddingHorizontal": 5,
+          "paddingVertical": 15,
+          "textAlign": "auto",
+        },
+        {
+          "color": "#11181C",
+        },
+      ]
+    }
+    testID="textarea"
+    underlineColorAndroid="transparent"
+  />
+</View>
+`;

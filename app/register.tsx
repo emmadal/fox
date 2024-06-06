@@ -93,10 +93,10 @@ const Page = () => {
         reset();
         fn.updateToken(data.data?.token);
         fn.updateProfile(data.data?.user);
-        router.replace("/home");
+        router.replace("/bio");
       });
     },
-    onError: (error, variables, context) => {
+    onError: (error) => {
       Alert.alert(error.message);
     },
   });

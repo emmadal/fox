@@ -17,3 +17,13 @@ export const registerSchema = z.object({
 export const resetPasswordSchema = z.object({
   email: z.string().email().trim(),
 });
+
+export const profileSchema = z.object({
+  id: z.number().positive(),
+  full_name: z.string().trim(),
+  email: z.string().email().trim(),
+  biography: z.string().max(200).trim(),
+  photo: z.string().trim(),
+  birth_date: z.any(),
+  certified: z.boolean(),
+});
