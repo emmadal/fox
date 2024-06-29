@@ -1,7 +1,6 @@
 import React from "react";
 import { ThemedView } from "@/components/ThemedView";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Image } from "expo-image";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -18,10 +17,9 @@ import Button from "@/components/Button";
 import z from "zod";
 import i18n from "@/i18n";
 import { Link } from "expo-router";
+import { Logo } from "@/components/Logo";
 
 type Inputs = z.infer<typeof resetPasswordSchema>;
-const blurhash =
-  "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 const Forget = () => {
   const {
@@ -45,16 +43,7 @@ const Forget = () => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ThemedView lightColor="transparent" style={styles.container}>
-          <Image
-            style={styles.image}
-            source={require("@/assets/images/icon.png")}
-            placeholder={{ blurhash }}
-            contentFit="cover"
-            transition={1000}
-            alt="logo"
-            aria-label="logo"
-            cachePolicy="memory"
-          />
+          <Logo />
           <ThemedView
             lightColor="transparent"
             darkColor="transparent"
@@ -136,12 +125,6 @@ const styles = StyleSheet.create({
   },
   forgot: {
     marginBottom: 30,
-  },
-  image: {
-    height: 130,
-    width: 130,
-    aspectRatio: 1,
-    borderRadius: 100,
   },
 });
 

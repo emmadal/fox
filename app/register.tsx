@@ -1,7 +1,6 @@
 import React, { startTransition, useState } from "react";
 import { ThemedView } from "@/components/ThemedView";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Image } from "expo-image";
 import { getLocales } from "expo-localization";
 import {
   KeyboardAvoidingView,
@@ -30,10 +29,9 @@ import { Link, router } from "expo-router";
 import { useMutation } from "@tanstack/react-query";
 import { register } from "@/api";
 import { useStore } from "@/store";
+import { Logo } from "@/components/Logo";
 
 type Inputs = z.infer<typeof registerSchema>;
-const blurhash =
-  "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 const Page = () => {
   const fn = useStore((state) => state);
@@ -121,16 +119,7 @@ const Page = () => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ThemedView lightColor="transparent" style={styles.container}>
-            <Image
-              style={styles.image}
-              source={require("@/assets/images/icon.png")}
-              placeholder={{ blurhash }}
-              contentFit="cover"
-              transition={1000}
-              alt="logo"
-              aria-label="logo"
-              cachePolicy="memory"
-            />
+            <Logo />
             <ThemedView
               lightColor="transparent"
               darkColor="transparent"
@@ -315,7 +304,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: Platform.select({
-      ios: 55,
+      ios: 20,
       android: 30,
     }),
   },
@@ -340,10 +329,6 @@ const styles = StyleSheet.create({
   footer: {
     marginVertical: 25,
     textAlign: "right",
-  },
-  image: {
-    height: 100,
-    width: 100,
   },
   errorsignup: {
     color: "red",

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Dimensions, Platform, useColorScheme } from "react-native";
+import { StyleSheet, Dimensions, useColorScheme } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
 import { Image } from "expo-image";
 import { ThemedText } from "@/components/ThemedText";
