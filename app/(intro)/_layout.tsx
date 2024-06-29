@@ -10,11 +10,7 @@ const IntroLayout = () => {
     // in the headless Node process that the pages are rendered in.
     return <Redirect key="signin" href="/signin" />;
   }
-  return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="bio" />
-    </Stack>
-  );
+  return <Stack screenOptions={{ headerShown: false }} />;
 };
 
 export default IntroLayout;

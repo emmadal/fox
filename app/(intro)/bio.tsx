@@ -117,7 +117,7 @@ const BioPage = () => {
                   value={value}
                 />
               )}
-              name="email"
+              name="biography"
             />
             <ThemedText type="default" style={styles.error}>
               {errors?.biography?.message}

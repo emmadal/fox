@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render } from "@testing-library/react-native";
 import { Logo } from "../Logo";
-Logo
+
 describe("ImageComponent", () => {
   it("render component correctly", () => {
     const tree = render(<Logo />).toJSON();
