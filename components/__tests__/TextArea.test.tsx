@@ -1,11 +1,10 @@
 import * as React from "react";
-import renderer from "react-test-renderer";
 import { render, fireEvent } from "@testing-library/react-native";
 import { TextArea } from "../TextArea";
 
 describe("InputComponent", () => {
   it("render correctly", () => {
-    const tree = renderer.create(<TextArea placeholder="biography" />).toJSON();
+    const tree = render(<TextArea placeholder="biography" />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 

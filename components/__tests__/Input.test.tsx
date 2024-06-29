@@ -1,11 +1,10 @@
 import * as React from "react";
-import renderer from "react-test-renderer";
-import { render, screen, fireEvent } from "@testing-library/react-native";
+import { render, fireEvent } from "@testing-library/react-native";
 import { Input } from "../Input";
 
 describe("InputComponent", () => {
   it("render correctly", () => {
-    const tree = renderer.create(<Input label="username" />).toJSON();
+    const tree = render(<Input label="username" />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 

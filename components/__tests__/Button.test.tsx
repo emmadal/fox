@@ -1,11 +1,10 @@
 import * as React from "react";
-import renderer from "react-test-renderer";
 import { render, fireEvent } from "@testing-library/react-native";
 import Button from "../Button";
 
 describe("ButtonComponent", () => {
   it("render correctly", () => {
-    const tree = renderer.create(<Button title="submit" />).toJSON();
+    const tree = render(<Button title="submit" />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
