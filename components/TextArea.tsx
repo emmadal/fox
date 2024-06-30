@@ -27,12 +27,7 @@ interface Props extends TextInputProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export function TextArea({
-  value,
-  placeholder,
-  style,
-  ...rest
-}: Props) {
+export function TextArea({ value, placeholder, style, ...rest }: Props) {
   const colorScheme = useColorScheme();
   return (
     <ThemedView style={[styles.container, style]}>
@@ -77,7 +72,7 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     paddingHorizontal: 5,
     paddingVertical: Platform.select({
-        ios: 15,
+      ios: 15,
     }),
     backgroundColor: "transparent",
   },

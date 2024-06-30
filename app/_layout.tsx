@@ -55,7 +55,7 @@ export default function RootLayout() {
         router.replace("/home");
       }
     }
-  }, [loaded]);
+  }, [loaded, session.isSignout, session.token]);
 
   if (!loaded) {
     return null;

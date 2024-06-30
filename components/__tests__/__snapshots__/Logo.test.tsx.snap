@@ -1,55 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ImageComponent render component correctly 1`] = `
-<ViewManagerAdapter_ExpoImage
-  accessibilityLabel="logo"
+<Image
+  alt="logo"
   aria-label="logo"
-  aspectRatio={1}
-  cachePolicy="memory-disk"
-  contentFit="contain"
-  contentPosition={
-    {
-      "left": "50%",
-      "top": "50%",
-    }
-  }
-  height={130}
-  nativeViewRef={"[React.ref]"}
-  onError={[Function]}
-  onLoad={[Function]}
-  onLoadStart={[Function]}
-  onProgress={[Function]}
-  placeholder={
-    [
-      {
-        "height": 16,
-        "uri": "blurhash:/%7CrF%3FhV%252WCj%5Bayj%5Ba%7Cj%5Baz_NaeWBj@ayfRayfQfQM%7BM%7Cazj%5Bazf6fQfQfQIpWXofj%5Bayj%5Bj%5BfQayWCoeoeaya%7Dj%5BayfQa%7BoLj%3Fj%5BWVj%5Bayayj%5BfQoff7azayj%5Bayj%5Bj%5Bayofayayayj%5BfQj%5Bayayj%5Bayfjj%5Bj%5Bayjuayj%5B",
-        "width": 16,
-      },
-    ]
-  }
-  source={
-    [
-      {
-        "__packager_asset": true,
-        "height": 1,
-        "scale": 1,
-        "uri": "file://assets/full/path/to/directory/name.type",
-        "width": 1,
-      },
-    ]
-  }
+  resizeMode="contain"
+  source={1}
   style={
-    {
-      "aspectRatio": 1,
-      "height": 130,
-    }
+    [
+      {
+        "aspectRatio": 1,
+        "height": 130,
+      },
+      undefined,
+    ]
   }
   testID="logo"
-  transition={
-    {
-      "duration": 1000,
-    }
-  }
 />
 `;

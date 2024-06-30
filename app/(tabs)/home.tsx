@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 import { useStore } from "@/store";
 
 export default function HomeScreen() {
-  const fn = useStore(s => s.signOut)
+  const fn = useStore((s) => s.signOut);
   return (
     <ThemedView style={styles.titleContainer}>
       <ThemedText type="title">Welcome!</ThemedText>

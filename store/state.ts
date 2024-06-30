@@ -13,5 +13,5 @@ export const initialState: InitState = {
   },
   token: null,
   isSignout: true,
-  language: 'en',
+  language: "en",
 };

@@ -35,8 +35,15 @@ interface Props extends TextInputProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export function Input({ label, value, secure, placeholder, style, ...rest }: Props) {
-    const colorScheme = useColorScheme()
+export function Input({
+  label,
+  value,
+  secure,
+  placeholder,
+  style,
+  ...rest
+}: Props) {
+  const colorScheme = useColorScheme();
   return (
     <View style={[styles.container, style]}>
       <View style={styles.labelContainer}>
@@ -58,7 +65,7 @@ export function Input({ label, value, secure, placeholder, style, ...rest }: Pro
         underlineColorAndroid="transparent"
         autoCapitalize="none"
         selectionColor={Colors.primaryColor}
-        aria-label={label}        
+        aria-label={label}
         {...rest}
       />
     </View>
