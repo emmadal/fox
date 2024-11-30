@@ -1,0 +1,34 @@
+name: Commitlint
+
+on: [pull_request]
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.x"
+
+      - name: Install required dependencies
+        run: |
+          whoami
+          ls -la /var/lib/apt/lists/
+          sudo apt-get update && sudo apt-get install -y
+          sudo rm -f /var/cache/apt/pkgcache.bin /var/cache/apt/srcpkgcache.bin
+          sudo apt-get clean
+          sudo apt install -y git curl
+
+      - name: Install commitlint
+        run: |
+          npm install conventional-changelog-conventionalcommits
+          npm install commitlint@latest
+
+      - name: Validate PR commits with commitlint
+        if: github.event_name == 'pull_request'
+        run: npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
