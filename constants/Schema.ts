@@ -1,12 +1,12 @@
-import { username } from "./Regex";
+import { email, username } from "./Regex";
 import i18n from "@/i18n";
 import { z } from "zod";
 
 export const loginSchema = z
   .object({
-    username: z
+    email: z
       .string({ required_error: `${i18n.t("fieldrequired")}` })
-      .regex(username, { message: `${i18n.t("usernameinvalid")}` })
+      .regex(email, { message: `${i18n.t("invalidemail")}` })
       .trim(),
     password: z
       .string({ required_error: `${i18n.t("fieldrequired")}` })

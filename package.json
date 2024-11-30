@@ -12,7 +12,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --watchAll",
+    "test": "jest --watchAll ./components/**/*.{jsx,tsx}",
     "lint": "expo lint",
     "prepare": "husky",
     "lint-commit": "commitlint --edit"
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
+    "@hookform/resolvers": "^3.9.1",
     "@react-navigation/bottom-tabs": "^7.0.0",
     "@react-navigation/native": "^7.0.0",
     "@shopify/flash-list": "1.7.1",
@@ -44,6 +45,7 @@
     "expo-video": "~2.0.1",
     "expo-web-browser": "~14.0.1",
     "i18n-js": "^4.5.0",
+    "lucide-react-native": "^0.462.0",
     "nativewind": "^4.1.23",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -64,6 +66,8 @@
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
     "@tanstack/eslint-plugin-query": "^5.61.3",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/react-native": "^12.9.0",
     "@types/jest": "^29.5.12",
     "@types/react": "~18.3.12",
     "@types/react-test-renderer": "^18.3.0",
@@ -84,7 +88,7 @@
     "**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write",
-      "jest"
+      "jest ./components/**/*.{jsx,tsx}"
     ]
   },
   "expo": {
