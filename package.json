@@ -45,7 +45,6 @@
     "expo-video": "~2.0.1",
     "expo-web-browser": "~14.0.1",
     "i18n-js": "^4.5.0",
-    "lucide-react-native": "^0.462.0",
     "nativewind": "^4.1.23",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -97,7 +96,8 @@
         "exclude": [
           "expo-video",
           "i18n-js",
-          "tailwindcss"
+          "tailwindcss",
+          "@hookform/resolvers"
         ]
       }
     }

@@ -9,6 +9,9 @@ module.exports = {
         primary: {
           1000: "#f97316",
         },
+        gray: {
+          1000: "#f1f1f1",
+        },
       },
     },
   },
