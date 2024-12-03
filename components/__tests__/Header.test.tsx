@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { Header } from "../Header";
 import { DrawerActions } from "@react-navigation/native";
 
@@ -10,6 +10,7 @@ jest.mock("@react-navigation/native", () => {
   return {
     ...actualNavigation,
     useNavigation: jest.fn(() => ({
+      navigate: jest.fn(),
       dispatch: jest.fn(),
     })),
     DrawerActions: {
@@ -29,7 +30,7 @@ jest.mock("@expo/vector-icons/Octicons", () => {
 });
 
 describe("Header Component", () => {
-  it("renders correctly", () => {
+  it("drawer button renders correctly", () => {
     const { toJSON } = render(
       <NavigationContainer>
         <Header />
@@ -38,7 +39,7 @@ describe("Header Component", () => {
     expect(toJSON()).toMatchSnapshot();
   });
 
-  it("displays the flame icon, app name, and three-bars icon", () => {
+  it("displays the flame icon, app name, bell icon and three-bars icon", () => {
     const { getByTestId } = render(
       <NavigationContainer>
         <Header />
@@ -47,6 +48,7 @@ describe("Header Component", () => {
 
     expect(getByTestId("icon-flame")).toBeTruthy();
     expect(getByTestId("app-name")).toBeTruthy();
+    expect(getByTestId("icon-bell")).toBeTruthy();
     expect(getByTestId("icon-gear")).toBeTruthy();
   });
 
@@ -57,7 +59,26 @@ describe("Header Component", () => {
       </NavigationContainer>,
     );
 
-    fireEvent.press(getByTestId("header-button"));
+    fireEvent.press(getByTestId("drawer-button"));
     expect(DrawerActions.openDrawer).toHaveBeenCalled();
+  });
+
+  it("dispatches the notification action when the button is pressed", () => {
+    const navigateMock = jest.fn();
+    (useNavigation as jest.Mock).mockReturnValue({
+      navigate: navigateMock,
+    });
+
+    const { getByTestId } = render(
+      <NavigationContainer>
+        <Header />
+      </NavigationContainer>,
+    );
+
+    fireEvent.press(getByTestId("notification-button"));
+
+    expect(navigateMock).toHaveBeenCalledWith("(home)", {
+      screen: "notification",
+    });
   });
 });

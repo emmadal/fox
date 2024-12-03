@@ -3,6 +3,8 @@ import Icon from "@expo/vector-icons/Octicons";
 import i18n from "@/i18n";
 import { Colors } from "@/constants/Colors";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
+import { Badge } from "./Badge";
+import { notifs } from "@/data/notif";
 
 export function Header() {
   const navigation = useNavigation();
@@ -26,20 +28,45 @@ export function Header() {
           </Text>
         </View>
 
-        <TouchableOpacity
-          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-          className="bg-transparent"
-          testID="header-button"
-        >
-          <Icon
-            name="three-bars"
-            size={24}
-            color={
-              colorScheme === "light" ? Colors.light.text : Colors.dark.text
+        <View className="flex-row items-center gap-14">
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("(home)", { screen: "notification" })
             }
-            testID="icon-gear"
-          />
-        </TouchableOpacity>
+            className="bg-transparent"
+            testID="notification-button"
+          >
+            {notifs.length === 0 ? null : (
+              <Badge
+                text={notifs.length > 10 ? "10+" : `${notifs.length}`}
+                color="danger"
+              />
+            )}
+
+            <Icon
+              name="bell"
+              size={25}
+              color={
+                colorScheme === "light" ? Colors.light.text : Colors.dark.text
+              }
+              testID="icon-bell"
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+            className="bg-transparent"
+            testID="drawer-button"
+          >
+            <Icon
+              name="three-bars"
+              size={25}
+              color={
+                colorScheme === "light" ? Colors.light.text : Colors.dark.text
+              }
+              testID="icon-gear"
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
