@@ -4,7 +4,6 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
@@ -17,8 +16,11 @@ import {
 import { AppState, Platform, type AppStateStatus } from "react-native";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import * as Network from "expo-network";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
 import "../global.css";
+import { Drawer } from "expo-router/drawer";
+import { DrawerMenu } from "@/components/DrawerMenu";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -68,11 +70,26 @@ export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(auth)" />
-          <Stack.Screen name="(home)" />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Drawer
+            drawerContent={(props) => <DrawerMenu {...props} />}
+            screenOptions={{
+              headerShown: false,
+              drawerPosition: "right",
+            }}
+            detachInactiveScreens
+          >
+            <Drawer.Screen
+              name="(auth)"
+              options={{ drawerItemStyle: { display: "none" } }}
+            />
+            <Drawer.Screen name="(home)" options={{ drawerLabel: "Home" }} />
+            <Drawer.Screen
+              name="+not-found"
+              options={{ drawerItemStyle: { display: "none" } }}
+            />
+          </Drawer>
+        </GestureHandlerRootView>
         <StatusBar style="auto" />
       </ThemeProvider>
     </QueryClientProvider>

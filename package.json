@@ -24,6 +24,7 @@
     "@expo/vector-icons": "^14.0.2",
     "@hookform/resolvers": "^3.9.1",
     "@react-navigation/bottom-tabs": "^7.0.0",
+    "@react-navigation/drawer": "^7.0.18",
     "@react-navigation/native": "^7.0.0",
     "@shopify/flash-list": "1.7.1",
     "@tanstack/react-query": "^5.61.3",

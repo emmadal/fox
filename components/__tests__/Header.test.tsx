@@ -1,43 +1,63 @@
 import React from "react";
-import { render } from "@testing-library/react-native";
+import { render, fireEvent } from "@testing-library/react-native";
+import { NavigationContainer } from "@react-navigation/native";
 import { Header } from "../Header";
-import i18n from "@/i18n";
+import { DrawerActions } from "@react-navigation/native";
 
-// Mock the Octicons icon
+// Mock Navigation
+jest.mock("@react-navigation/native", () => {
+  const actualNavigation = jest.requireActual("@react-navigation/native");
+  return {
+    ...actualNavigation,
+    useNavigation: jest.fn(() => ({
+      dispatch: jest.fn(),
+    })),
+    DrawerActions: {
+      openDrawer: jest.fn(),
+    },
+  };
+});
+
 jest.mock("@expo/vector-icons/Octicons", () => {
-  // eslint-disable-next-line react/display-name
-  return ({
-    name,
-    size,
-    color,
-  }: {
-    name: string;
-    size: number;
-    color: string;
-  }) => {
-    const { View } = require("react-native");
-    return <View testID={`icon-${name}`} />;
+  return {
+    __esModule: true,
+    default: ({ testID }: { testID: string }) => {
+      const { View } = require("react-native");
+      return <View testID={testID} />;
+    },
   };
 });
 
 describe("Header Component", () => {
-  it("renders all elements with correct testIDs", () => {
-    const { getByTestId } = render(<Header />);
-    expect(getByTestId("header")).toBeTruthy();
-    expect(getByTestId("header-content")).toBeTruthy();
-    expect(getByTestId("icon-flame")).toBeTruthy();
-    expect(getByTestId("app-name")).toBeTruthy();
+  it("renders correctly", () => {
+    const { toJSON } = render(
+      <NavigationContainer>
+        <Header />
+      </NavigationContainer>,
+    );
+    expect(toJSON()).toMatchSnapshot();
   });
 
-  it("renders correctly with proper content", () => {
-    const { getByTestId, getByText } = render(<Header />);
+  it("displays the flame icon, app name, and three-bars icon", () => {
+    const { getByTestId } = render(
+      <NavigationContainer>
+        <Header />
+      </NavigationContainer>,
+    );
 
-    // Check if the flame icon is rendered
-    const flameIcon = getByTestId("icon-flame");
-    expect(flameIcon).toBeTruthy();
+    expect(getByTestId("icon-flame")).toBeTruthy();
+    expect(getByTestId("app-name")).toBeTruthy();
+    expect(getByTestId("icon-gear")).toBeTruthy();
+  });
 
-    // Check if the display name text is rendered with correct content
-    const displayName = getByText(i18n.t("CFBundleDisplayName"));
-    expect(displayName).toBeTruthy();
+  it("dispatches the drawer action when the button is pressed", () => {
+    const { getByTestId } = render(
+      <NavigationContainer>
+        <Header />
+      </NavigationContainer>,
+    );
+
+    fireEvent.press(getByTestId("header-button"));
+    expect(DrawerActions.openDrawer).toHaveBeenCalled();
   });
 });
