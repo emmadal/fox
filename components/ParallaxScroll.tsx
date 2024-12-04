@@ -3,7 +3,9 @@ import { ScrollView, useWindowDimensions } from "react-native";
 
 export default function ParallaxScroll({
   children,
+  className,
 }: {
+  className?: string;
   children: React.ReactNode;
 }) {
   const { height } = useWindowDimensions();
@@ -18,7 +20,7 @@ export default function ParallaxScroll({
       snapToAlignment="start"
       automaticallyAdjustContentInsets
       contentInsetAdjustmentBehavior="automatic"
-      className="p-5 dark:bg-black bg-white"
+      className={`p-5 dark:bg-black bg-white ${className}`}
       testID="parallax-scroll-view"
     >
       {children}
