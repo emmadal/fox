@@ -9,6 +9,7 @@ import { Colors } from "@/constants/Colors";
 import Icon from "@expo/vector-icons/Entypo";
 import { ExternalLink } from "@/components/ExternalLink";
 import { useNavigation } from "expo-router";
+import MaterialTopTabs from "@/components/MaterialTopTabs";
 
 const Profile = () => {
   const { user } = useStore();
@@ -81,7 +82,7 @@ const Profile = () => {
           </View>
         )}
       </View>
-      <View className="flex-row gap-14 self-center mt-3">
+      <View className="flex-row gap-14 self-center mt-3 mb-5">
         <View className="items-center">
           <Text className="text-black text-lg dark:text-white font-bold">
             0
@@ -107,6 +108,7 @@ const Profile = () => {
           </Text>
         </View>
       </View>
+      <MaterialTopTabs />
     </ParallaxScroll>
   );
 };

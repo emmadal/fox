@@ -87,7 +87,10 @@ export default function RootLayout() {
               name="(auth)"
               options={{ drawerItemStyle: { display: "none" } }}
             />
-            <Drawer.Screen name="(home)" options={{ drawerLabel: "Home" }} />
+            <Drawer.Screen
+              name="(home)"
+              options={{ drawerItemStyle: { display: "none" } }}
+            />
             <Drawer.Screen
               name="+not-found"
               options={{ drawerItemStyle: { display: "none" } }}
