@@ -21,6 +21,8 @@ import "react-native-reanimated";
 import "../global.css";
 import { Drawer } from "expo-router/drawer";
 import { DrawerMenu } from "@/components/DrawerMenu";
+import { useStore } from "@/store";
+import { user } from "@/data/about";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -36,6 +38,7 @@ function onAppStateChange(status: AppStateStatus) {
 }
 
 export default function RootLayout() {
+  const { getProfile } = useStore();
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -53,8 +56,9 @@ export default function RootLayout() {
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
+      getProfile(user, "token");
     }
-  }, [loaded]);
+  }, [getProfile, loaded]);
 
   // Subscribe to app state changes
   useEffect(() => {
