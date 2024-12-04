@@ -1,23 +1,16 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { Header } from "../Header";
-import { DrawerActions } from "@react-navigation/native";
+import * as NavigationHooks from "@react-navigation/native";
+import * as ExpoRouter from "expo-router";
 
-// Mock Navigation
-jest.mock("@react-navigation/native", () => {
-  const actualNavigation = jest.requireActual("@react-navigation/native");
-  return {
-    ...actualNavigation,
-    useNavigation: jest.fn(() => ({
-      navigate: jest.fn(),
-      dispatch: jest.fn(),
-    })),
-    DrawerActions: {
-      openDrawer: jest.fn(),
-    },
-  };
-});
+// Mock dependencies
+jest.mock("@react-navigation/native", () => ({
+  ...jest.requireActual("@react-navigation/native"),
+  useNavigation: jest.fn(),
+  DrawerActions: { openDrawer: jest.fn(() => ({ type: "OPEN_DRAWER" })) },
+}));
 
 jest.mock("@expo/vector-icons/Octicons", () => {
   return {
@@ -29,56 +22,105 @@ jest.mock("@expo/vector-icons/Octicons", () => {
   };
 });
 
+jest.mock("expo-router", () => ({
+  useRouter: jest.fn(),
+}));
+
+jest.mock("@/data/notif", () => ({
+  notifs: [],
+}));
+
+jest.mock("@/i18n", () => ({
+  t: jest.fn(() => "TestApp"),
+}));
+
 describe("Header Component", () => {
-  it("drawer button renders correctly", () => {
-    const { toJSON } = render(
+  let mockNavigation: any;
+  let mockRouter: any;
+
+  beforeEach(() => {
+    // Reset mocks before each test
+    mockNavigation = {
+      dispatch: jest.fn(),
+    };
+    mockRouter = {
+      navigate: jest.fn(),
+    };
+
+    (NavigationHooks.useNavigation as jest.Mock).mockReturnValue(
+      mockNavigation,
+    );
+    (ExpoRouter.useRouter as jest.Mock).mockReturnValue(mockRouter);
+  });
+
+  const renderComponent = () => {
+    return render(
       <NavigationContainer>
         <Header />
       </NavigationContainer>,
     );
-    expect(toJSON()).toMatchSnapshot();
+  };
+
+  it("renders the app name correctly", () => {
+    const { getByTestId } = renderComponent();
+
+    const appNameElement = getByTestId("app-name");
+    expect(appNameElement).toBeTruthy();
+    expect(appNameElement.props.children).toBe("TestApp");
   });
 
-  it("displays the flame icon, app name, bell icon and three-bars icon", () => {
-    const { getByTestId } = render(
-      <NavigationContainer>
-        <Header />
-      </NavigationContainer>,
-    );
+  it("renders flame icon", () => {
+    const { getByTestId } = renderComponent();
 
-    expect(getByTestId("icon-flame")).toBeTruthy();
-    expect(getByTestId("app-name")).toBeTruthy();
-    expect(getByTestId("icon-bell")).toBeTruthy();
-    expect(getByTestId("icon-gear")).toBeTruthy();
+    const flameIcon = getByTestId("icon-flame");
+    expect(flameIcon).toBeTruthy();
   });
 
-  it("dispatches the drawer action when the button is pressed", () => {
-    const { getByTestId } = render(
-      <NavigationContainer>
-        <Header />
-      </NavigationContainer>,
-    );
+  it("navigates to notification screen when bell icon is pressed", () => {
+    const { getByTestId } = renderComponent();
 
-    fireEvent.press(getByTestId("drawer-button"));
-    expect(DrawerActions.openDrawer).toHaveBeenCalled();
+    const notificationButton = getByTestId("notification-button");
+    fireEvent.press(notificationButton);
+
+    expect(mockRouter.navigate).toHaveBeenCalledWith("/(home)/notification");
   });
 
-  it("dispatches the notification action when the button is pressed", () => {
-    const navigateMock = jest.fn();
-    (useNavigation as jest.Mock).mockReturnValue({
-      navigate: navigateMock,
+  it("opens drawer when hamburger icon is pressed", () => {
+    const { getByTestId } = renderComponent();
+
+    const drawerButton = getByTestId("drawer-button");
+    fireEvent.press(drawerButton);
+
+    expect(mockNavigation.dispatch).toHaveBeenCalledWith({
+      type: "OPEN_DRAWER",
+    });
+  });
+
+  describe("Notification Badge", () => {
+    it("does not render badge when no notifications", () => {
+      (require("@/data/notif").notifs as jest.Mocked<any[]>) = [];
+
+      const { queryByText } = renderComponent();
+
+      expect(queryByText("10+")).toBeNull();
     });
 
-    const { getByTestId } = render(
-      <NavigationContainer>
-        <Header />
-      </NavigationContainer>,
-    );
+    it("renders badge with correct number of notifications", () => {
+      (require("@/data/notif").notifs as jest.Mocked<any[]>) = [1, 2, 3];
 
-    fireEvent.press(getByTestId("notification-button"));
+      const { getByText } = renderComponent();
 
-    expect(navigateMock).toHaveBeenCalledWith("(home)", {
-      screen: "notification",
+      expect(getByText("3")).toBeTruthy();
+    });
+
+    it('renders "10+" when notifications exceed 10', () => {
+      (require("@/data/notif").notifs as jest.Mocked<any[]>) = new Array(
+        15,
+      ).fill(null);
+
+      const { getByText } = renderComponent();
+
+      expect(getByText("10+")).toBeTruthy();
     });
   });
 });

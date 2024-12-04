@@ -1,29 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header Component drawer button renders correctly 1`] = `
-<View
-  className="h-28 justify-end px-5 bg-white dark:bg-black"
-  testID="header"
+exports[`FilePicker Component renders correctly when visible 1`] = `
+<Modal
+  animationType="slide"
+  hardwareAccelerated={false}
+  onRequestClose={[MockFunction]}
+  testID="file-picker-modal"
+  transparent={true}
+  visible={true}
 >
   <View
-    className="flex-row items-center justify-between mb-5"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessible={true}
+    className="flex-1 justify-center items-center bg-transparent"
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    testID="file-picker-backdrop"
   >
     <View
-      className="bg-transparent flex-row items-center dark:bg-transparent gap-2"
-      testID="header-content"
-    >
-      <View
-        testID="icon-flame"
-      />
-      <Text
-        className="text-black font-bold text-3xl dark:text-white"
-        testID="app-name"
-      >
-        Fox
-      </Text>
-    </View>
-    <View
-      className="flex-row items-center gap-14"
+      className="dark:bg-gray-800 bg-gray-100 dark:text-white absolute bottom-1/2 self-center py-6 gap-8 pl-5 w-[90%] rounded-lg"
     >
       <View
         accessibilityState={
@@ -58,38 +67,14 @@ exports[`Header Component drawer button renders correctly 1`] = `
             "opacity": 1,
           }
         }
-        testID="notification-button"
+        testID="camera-button"
       >
-        <View
-          style={
-            [
-              {
-                "alignItems": "center",
-                "borderRadius": 50,
-                "height": 22,
-                "justifyContent": "center",
-                "position": "absolute",
-                "right": -7,
-                "top": -10,
-                "width": 22,
-                "zIndex": 1,
-              },
-              {
-                "backgroundColor": "#f44336",
-              },
-            ]
-          }
-          testID="badge"
+        <View />
+        <Text
+          className="text-black dark:text-white font-medium text-lg"
         >
-          <Text
-            className="text-center text-xs text-white"
-          >
-            4
-          </Text>
-        </View>
-        <View
-          testID="icon-bell"
-        />
+          takephoto
+        </Text>
       </View>
       <View
         accessibilityState={
@@ -124,13 +109,16 @@ exports[`Header Component drawer button renders correctly 1`] = `
             "opacity": 1,
           }
         }
-        testID="drawer-button"
+        testID="photo-button"
       >
-        <View
-          testID="icon-gear"
-        />
+        <View />
+        <Text
+          className="text-black dark:text-white font-medium text-lg"
+        >
+          choosephoto
+        </Text>
       </View>
     </View>
   </View>
-</View>
+</Modal>
 `;
