@@ -33,6 +33,12 @@
   "onboardingtitle": "Engage with the Community",
   "home": "Home",
   "profile": "Profile",
+  "explore": "Explore",
+  "notifications": "Notifications",
+  "messages": "Messages",
+  "settings": "Settings",
+  "discover": "Discover",
+  "editprofile": "Edit profile",
   "intro": "Let’s begin the adventure",
   "introdesc": "Hello! Looks like you’re enjoying on Fox, but you haven’t describe yourself.",
   "next": "Next",
@@ -44,6 +50,8 @@
   "search": "Search",
   "follow": "Follow",
   "following": "Following",
+  "followers": "Followers",
+  "retweets": "Retweets",
   "promoted": "Promoted",
   "wrong": "Something went wrong. Try later",
   "account": "Account",
@@ -63,5 +71,7 @@
   "reportsuccess": "Report sent successfully",
   "reportsuccessdesc": "We will review your report and take appropriate action",
   "reporterror": "Report failed",
-  "reporterrordesc": "Something went wrong. Please try again later"
+  "reporterrordesc": "Something went wrong. Please try again later",
+  "joined": "Joined",
+  "loading": "Loading"
 }
