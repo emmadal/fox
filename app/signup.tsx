@@ -8,7 +8,6 @@ import Input from "@/components/Input";
 import i18n from "@/i18n";
 import Button from "@/components/Button";
 import { ExternalLink } from "@/components/ExternalLink";
-import { ThemedText } from "@/components/ThemedText";
 
 type Inputs = z.infer<typeof registerSchema>;
 
@@ -139,14 +138,14 @@ export default function SignUp() {
           )}
         </View>
 
-        <ThemedText type="defaultSemiBold" className="text-sm">
+        <Text className="text-sm text-black dark:text-white">
           {i18n.t("rulesprivacy")}{" "}
-          <ThemedText type="link">
+          <Text className="text-primary-1000 font-medium text-sm">
             <ExternalLink href="https://docs.expo.dev/router/introduction">
-              <ThemedText type="link">{i18n.t("privacypolicy")}</ThemedText>
+              {i18n.t("privacypolicy")}
             </ExternalLink>
-          </ThemedText>
-        </ThemedText>
+          </Text>
+        </Text>
 
         <Button
           text={i18n.t("signup")}

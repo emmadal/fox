@@ -9,7 +9,7 @@
   "fieldrequired": "Champ obligatoire",
   "errorcredentials": "Email ou mot de passe incorrect",
   "login": "Se connecter",
-  "register": "Créer un nouveau compte",
+  "signup": "Créer un nouveau compte",
   "password": "Mot de passe",
   "email": "Email",
   "invalidemail": "Adresse e-mail invalide",
