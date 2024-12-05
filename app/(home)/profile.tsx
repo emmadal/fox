@@ -56,6 +56,10 @@ const Profile = () => {
     console.log(result);
   };
 
+  const goToEditProfile = () => {
+    router.navigate("/(home)/edit-profile");
+  };
+
   return (
     <ParallaxScroll>
       <FilePicker
@@ -70,10 +74,7 @@ const Profile = () => {
         </TouchableOpacity>
         <TouchableOpacity
           className="border border-gray-300 rounded-full px-5 py-2 justify-center items-center"
-          onPress={() => {
-            setVisible(true);
-            router.navigate("/(home)/edit-profile");
-          }}
+          onPress={goToEditProfile}
         >
           <Text className="text-black text-base font-medium dark:text-white">
             {i18n.t("editprofile")}
