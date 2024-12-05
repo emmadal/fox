@@ -25,7 +25,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version: '22.12.0'
+
+      - name: Install Yarn
+        run: npm install -g yarn@1.22.x
 
       - name: Setup EAS
         uses: expo/expo-github-action@v8
@@ -34,10 +37,10 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Run tests
-        run: npm run test
+        run: yarn test
 
       - name: Create preview build
         uses: expo/expo-github-action/preview@v8
