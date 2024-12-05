@@ -1,5 +1,8 @@
 name: preview
-on: pull_request
+on: 
+  push:
+    branches:
+      - main
 
 jobs:
   update:
@@ -31,12 +34,12 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Install dependencies
-        run: npm install --force
+        run: npm install
 
       - name: Run tests
-        run: npm test
+        run: npm run test
 
-      - name: Create preview
+      - name: Create preview build
         uses: expo/expo-github-action/preview@v8
         with:
           command: eas update --auto
