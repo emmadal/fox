@@ -5,8 +5,10 @@ import { Colors } from "@/constants/Colors";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { Badge } from "./Badge";
 import { notifs } from "@/data/notif";
+import { useRouter } from "expo-router";
 
 export function Header() {
+  const router = useRouter();
   const navigation = useNavigation();
   const colorScheme = useColorScheme();
   return (
@@ -30,9 +32,7 @@ export function Header() {
 
         <View className="flex-row items-center gap-14">
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("(home)", { screen: "notification" })
-            }
+            onPress={() => router.navigate("/(home)/notification")}
             className="bg-transparent"
             testID="notification-button"
           >
