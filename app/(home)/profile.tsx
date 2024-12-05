@@ -8,13 +8,19 @@ import { Image } from "expo-image";
 import { Colors } from "@/constants/Colors";
 import Icon from "@expo/vector-icons/Entypo";
 import { ExternalLink } from "@/components/ExternalLink";
-import { useNavigation } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import MaterialTopTabs from "@/components/MaterialTopTabs";
+import * as ImagePicker from "expo-image-picker";
+import FilePicker from "@/components/FilePicker";
 
 const Profile = () => {
   const { user } = useStore();
+  const [visible, setVisible] = React.useState(false);
   const colorScheme = useColorScheme();
+  const router = useRouter();
   const navigation = useNavigation();
+  const onOpenModal = () => setVisible(true);
+  const onCloseModal = () => setVisible(false);
 
   useEffect(() => {
     navigation.setOptions({
@@ -26,13 +32,49 @@ const Profile = () => {
     });
   }, [user.name, navigation, colorScheme]);
 
+  const onOpenCamera = async () => {
+    const permission = await ImagePicker.getCameraPermissionsAsync();
+    if (!permission.granted) {
+      await ImagePicker.requestCameraPermissionsAsync();
+    }
+    let result = await ImagePicker.launchCameraAsync();
+    console.log(result);
+  };
+
+  const onTakePhoto = async () => {
+    const permission = await ImagePicker.getMediaLibraryPermissionsAsync();
+    if (!permission.granted) {
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    }
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: "images",
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+      selectionLimit: 1,
+    });
+    console.log(result);
+  };
+
   return (
     <ParallaxScroll>
+      <FilePicker
+        isVisible={visible}
+        onClose={onCloseModal}
+        onOpenCamera={onOpenCamera}
+        onTakePhoto={onTakePhoto}
+      />
       <View className="flex-row items-center justify-between">
-        <TouchableOpacity onPress={() => console.log(user.avatar_url)}>
+        <TouchableOpacity onPress={onOpenModal}>
           <Avatar source={user.avatar_url as string} size={85} />
         </TouchableOpacity>
-        <TouchableOpacity className="border border-gray-300 rounded-full px-5 py-2 justify-center items-center">
+        <TouchableOpacity
+          className="border border-gray-300 rounded-full px-5 py-2 justify-center items-center"
+          onPress={() => {
+            setVisible(true);
+            router.navigate("/(home)/edit-profile");
+          }}
+        >
           <Text className="text-black text-base font-medium dark:text-white">
             {i18n.t("editprofile")}
           </Text>

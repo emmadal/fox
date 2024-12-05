@@ -73,5 +73,7 @@
   "reporterror": "Report failed",
   "reporterrordesc": "Something went wrong. Please try again later",
   "joined": "Joined",
-  "loading": "Loading"
+  "loading": "Loading",
+  "takephoto": "Take photo",
+  "choosephoto": "Choose photo from library"
 }

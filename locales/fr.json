@@ -73,5 +73,7 @@
   "reporterror": "Rapport échoué",
   "reporterrordesc": "Une erreur s'est produite. Veuillez essayer plus tard",
   "joined": "Crée en",
-  "loading": "Chargement"
+  "loading": "Chargement",
+    "takephoto": "Prendre une photo",
+    "choosephoto": "Choisir une photo"
 }
