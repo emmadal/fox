@@ -43,3 +43,14 @@ export const resetPasswordSchema = z.object({
     .email()
     .trim(),
 });
+
+export const editProfileSchema = z.object({
+  name: z
+    .string({ required_error: `${i18n.t("fieldrequired")}` })
+    .max(50)
+    .trim(),
+  biography: z.string().max(200).trim().optional(),
+  avatar_url: z.string().url().optional(),
+  location: z.string().max(50).trim().optional(),
+  website: z.string().url().trim().optional(),
+});

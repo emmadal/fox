@@ -75,5 +75,12 @@
   "joined": "Joined",
   "loading": "Loading",
   "takephoto": "Take photo",
-  "choosephoto": "Choose photo from library"
-}
+  "choosephoto": "Choose photo from library",
+  "location": "Location",
+  "website": "Website",
+  "save": "Save",
+  "edit": "Edit",
+  "delete": "Delete",
+  "deleteaccount": "Delete account",
+  "deleteaccountdesc": "Are you sure you want to delete your account?"
+} 

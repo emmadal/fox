@@ -74,6 +74,13 @@
   "reporterrordesc": "Une erreur s'est produite. Veuillez essayer plus tard",
   "joined": "Crée en",
   "loading": "Chargement",
-    "takephoto": "Prendre une photo",
-    "choosephoto": "Choisir une photo"
+  "takephoto": "Prendre une photo",
+  "choosephoto": "Choisir une photo",
+  "location": "Localisation",
+  "website": "Site web",
+  "save": "Sauvegarder",
+  "edit": "Éditer",
+  "delete": "Supprimer",
+  "deleteaccount": "Supprimer le compte",
+  "deleteaccountdesc": "Etes-vous sur de vouloir supprimer votre compte ?"
 }
