@@ -18,6 +18,7 @@ interface InputProps extends TextInputProps {
   onChangeText: (text: string) => void;
   secureTextEntry?: boolean;
   testID?: string;
+  textarea?: boolean;
 }
 
 /**
@@ -29,6 +30,7 @@ interface InputProps extends TextInputProps {
  * @param {function} onChangeText - The function to call when the input field's value changes.
  * @param {boolean} secureTextEntry - Whether the input field should be secure (password).
  * @param {string} testID - The test ID for the input field.
+ * @param {boolean} textarea - Whether the input field is a textarea.
  * @returns {JSX.Element} The input field component.
  */
 const Input: React.FC<InputProps> = ({
@@ -39,6 +41,8 @@ const Input: React.FC<InputProps> = ({
   secureTextEntry = false,
   keyboardType,
   testID,
+  textarea,
+  ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const colorScheme = useColorScheme();
@@ -54,19 +58,22 @@ const Input: React.FC<InputProps> = ({
         </Text>
       )}
       <View
-        style={[
+        style={StyleSheet.flatten([
           styles.inputContainer,
+          textarea && { height: 97 },
           isDarkMode ? styles.darkContainer : styles.lightContainer,
-        ]}
+        ])}
       >
         <TextInput
-          style={[
+          style={StyleSheet.flatten([
             styles.input,
+            textarea && { textAlignVertical: "top" },
             isDarkMode && styles.darkText,
             secureTextEntry && { paddingRight: 40 },
-          ]}
+          ])}
           value={value}
           onChangeText={onChangeText}
+          underlineColorAndroid="transparent"
           placeholder={placeholder}
           placeholderTextColor={
             isDarkMode ? Colors.dark.text : Colors.light.tabIconDefault
@@ -75,6 +82,8 @@ const Input: React.FC<InputProps> = ({
           autoCapitalize="none"
           secureTextEntry={secureTextEntry && !showPassword}
           testID={testID}
+          multiline={textarea}
+          {...props}
         />
         {secureTextEntry && (
           <Pressable
@@ -105,11 +114,11 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: "row",
-    alignItems: "center",
+    justifyContent: "center",
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 12,
-    height: 55,
+    height: 57,
   },
   lightContainer: {
     borderColor: "#ccc",
@@ -123,6 +132,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     color: "#000",
+    textAlign: "auto",
   },
   darkText: {
     color: "#fff",

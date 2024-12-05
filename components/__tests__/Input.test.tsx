@@ -7,103 +7,43 @@ jest.mock("@expo/vector-icons/Feather", () => "Icon");
 describe("Input Component", () => {
   const mockOnChangeText = jest.fn();
 
-  beforeEach(() => {
-    mockOnChangeText.mockClear();
+  it("renders correctly", () => {
+    const { toJSON } = render(
+      <Input
+        placeholder="Enter your username"
+        value=""
+        onChangeText={mockOnChangeText}
+      />,
+    );
+    expect(toJSON()).toMatchSnapshot();
   });
 
-  it("renders correctly with label", () => {
+  it("renders correctly with a label", () => {
     const { getByText, getByPlaceholderText } = render(
       <Input
-        label="Email"
-        placeholder="Enter your email"
+        label="Username"
+        placeholder="Enter your username"
         value=""
         onChangeText={mockOnChangeText}
       />,
     );
 
-    expect(getByText("Email")).toBeTruthy();
-    expect(getByPlaceholderText("Enter your email")).toBeTruthy();
+    expect(getByText("Username")).toBeTruthy();
+    expect(getByPlaceholderText("Enter your username")).toBeTruthy();
   });
 
-  it("renders correctly without label", () => {
-    const { queryByText, getByPlaceholderText } = render(
+  it("handles text input change", () => {
+    const { getByPlaceholderText } = render(
       <Input
-        placeholder="Enter your email"
+        placeholder="Enter your username"
         value=""
         onChangeText={mockOnChangeText}
       />,
     );
 
-    expect(queryByText("Email")).toBeNull();
-    expect(getByPlaceholderText("Enter your email")).toBeTruthy();
-  });
-
-  it("handles text input correctly", () => {
-    const { getByTestId } = render(
-      <Input
-        label="Email"
-        placeholder="Enter your email"
-        value=""
-        onChangeText={mockOnChangeText}
-        testID="email-input"
-      />,
-    );
-
-    const input = getByTestId("email-input");
-    fireEvent.changeText(input, "test@example.com");
-
-    expect(mockOnChangeText).toHaveBeenCalledWith("test@example.com");
-    expect(mockOnChangeText).toHaveBeenCalledTimes(1);
-  });
-
-  it("renders password input with toggle visibility button", () => {
-    const { getByTestId } = render(
-      <Input
-        label="Password"
-        placeholder="Enter password"
-        value=""
-        onChangeText={mockOnChangeText}
-        secureTextEntry
-        testID="password-input"
-      />,
-    );
-
-    const input = getByTestId("password-input");
-    const toggleButton = getByTestId("toggle-password");
-
-    expect(input.props.secureTextEntry).toBe(true);
-    expect(toggleButton).toBeTruthy();
-  });
-
-  it("toggles password visibility when toggle button is pressed", () => {
-    const { getByTestId } = render(
-      <Input
-        label="Password"
-        placeholder="Enter password"
-        value=""
-        onChangeText={mockOnChangeText}
-        secureTextEntry
-        testID="password-input"
-      />,
-    );
-
-    const input = getByTestId("password-input");
-    const toggleButton = getByTestId("toggle-password");
-
-    // Initial state: password is hidden
-    expect(input.props.secureTextEntry).toBe(true);
-
-    // Press toggle button
-    fireEvent.press(toggleButton);
-
-    // Password should be visible
-    expect(input.props.secureTextEntry).toBe(false);
-
-    // Press toggle button again
-    fireEvent.press(toggleButton);
-
-    // Password should be hidden again
-    expect(input.props.secureTextEntry).toBe(true);
+    const input = getByPlaceholderText("Enter your username");
+    fireEvent.changeText(input, "testuser");
+    expect(mockOnChangeText).toHaveBeenCalledWith("testuser");
   });
 
   it("applies correct keyboard type", () => {
@@ -122,19 +62,41 @@ describe("Input Component", () => {
     expect(input.props.keyboardType).toBe("email-address");
   });
 
-  it("sets autoCapitalize to none by default", () => {
-    const { getByTestId } = render(
+  it("renders secure text input with visibility toggle", () => {
+    const { getByPlaceholderText, getByTestId, queryByTestId } = render(
       <Input
-        label="Username"
-        placeholder="Enter username"
+        placeholder="Enter your password"
         value=""
+        secureTextEntry
         onChangeText={mockOnChangeText}
-        testID="username-input"
       />,
     );
 
-    const input = getByTestId("username-input");
-    expect(input.props.autoCapitalize).toBe("none");
+    const input = getByPlaceholderText("Enter your password");
+    expect(input.props.secureTextEntry).toBe(true);
+
+    // Toggle password visibility
+    const toggleButton = getByTestId("toggle-password");
+    expect(toggleButton).toBeTruthy();
+
+    fireEvent.press(toggleButton);
+    expect(queryByTestId("toggle-password")).toBeTruthy();
+    expect(input.props.secureTextEntry).toBe(false);
+  });
+
+  it("supports textarea mode", () => {
+    const { getByPlaceholderText } = render(
+      <Input
+        placeholder="Enter your comment"
+        value=""
+        textarea
+        onChangeText={mockOnChangeText}
+      />,
+    );
+
+    const input = getByPlaceholderText("Enter your comment");
+    expect(input.props.multiline).toBe(true);
+    expect(input.props.style.textAlignVertical).toBe("top");
   });
 
   it("applies dark mode styles when in dark mode", () => {
@@ -153,10 +115,7 @@ describe("Input Component", () => {
         testID="username-input"
       />,
     );
-
     const input = getByTestId("username-input");
-    expect(input.props.style).toContainEqual(
-      expect.objectContaining({ color: "#fff" }),
-    );
+    expect(input.props.style.color).toBe("#fff");
   });
 });

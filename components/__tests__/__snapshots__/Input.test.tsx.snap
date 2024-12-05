@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input Component renders correctly 1`] = `
+<View
+  style={
+    {
+      "marginBottom": 12,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "backgroundColor": "#fff",
+        "borderColor": "#ccc",
+        "borderRadius": 8,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "height": 57,
+        "justifyContent": "center",
+        "paddingHorizontal": 12,
+      }
+    }
+  >
+    <TextInput
+      autoCapitalize="none"
+      onChangeText={[MockFunction]}
+      placeholder="Enter your username"
+      placeholderTextColor="#687076"
+      secureTextEntry={false}
+      style={
+        {
+          "color": "#000",
+          "flex": 1,
+          "fontSize": 16,
+          "textAlign": "auto",
+        }
+      }
+      underlineColorAndroid="transparent"
+      value=""
+    />
+  </View>
+</View>
+`;
