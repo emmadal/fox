@@ -82,5 +82,25 @@
   "edit": "Edit",
   "delete": "Delete",
   "deleteaccount": "Delete account",
-  "deleteaccountdesc": "Are you sure you want to delete your account?"
-} 
+  "deleteaccountdesc": "Are you sure you want to delete your account?",
+  "areyousure": "Are you sure?",
+  "flipcamera": "Flip camera",
+  "permissioncamera": "We need your permission to show the camera",
+  "record": "Record",
+  "pause": "Pause",
+  "resume": "Resume",
+  "stop": "Stop",
+  "uploading": "Uploading",
+  "uploaderror": "Upload failed",
+  "uploaderrordesc": "Something went wrong. Please try again later",
+  "uploadsuccess": "Upload successful",
+  "uploadsuccessdesc": "Your video has been uploaded successfully",
+  "nocamera": "No camera available",
+  "recordvideo": "Record video",
+  "recordvideodesc": "Start recording your video",
+  "takephotedesc": "Take a photo",
+  "choosephotodesc": "Choose a photo from library",
+  "upload": "Upload",
+  "select": "Select",
+  "or": "or"
+}
