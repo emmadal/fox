@@ -5,6 +5,7 @@ import {
   View,
   AppState,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { Ionicons } from "@expo/vector-icons/";
@@ -50,45 +51,52 @@ export default function RecordVideo() {
   const handleMode = () => setMode(mode === "video" ? "picture" : "video");
   const goBack = () => router.back();
 
+  // Request permissions when the component mounts
   useEffect(() => {
-    if (!cameraStatus?.granted) {
-      (async () => {
+    (async () => {
+      if (!cameraStatus?.granted) {
         await requestCameraPermission();
-      })();
-    }
-  }, [requestCameraPermission, cameraStatus?.granted]);
-
-  useEffect(() => {
-    if (!microphoneStatus?.granted) {
-      (async () => {
+      }
+      if (!microphoneStatus?.granted) {
         await requestMicrophonePermission();
-      })();
-    }
-  }, [requestMicrophonePermission, microphoneStatus?.granted]);
-
-  useEffect(() => {
-    if (!permissionResponse?.granted) {
-      (async () => {
+      }
+      if (!permissionResponse?.granted) {
         await requestLibraryPermission();
-      })();
-    }
-  }, [requestLibraryPermission, permissionResponse?.granted]);
+      }
+    })();
+  }, []);
 
+  // Cleanup active recordings when the component unmounts
+  useEffect(() => {
+    const currentCamera = camera.current;
+    return () => {
+      if (currentCamera && isRecording && !isActive) {
+        currentCamera.stopRecording();
+      }
+    };
+  }, [isActive, isRecording]);
+
+  // Start recording when the user presses the record button
   const startRecording = async () => {
-    if (camera.current) {
+    if (camera.current && !isRecording) {
       setIsRecording(true);
       try {
         const video = await camera.current.recordAsync({
           maxFileSize: 10 * 1024 * 1024, // 10MB
-          maxDuration: 60000 * 10, // 10 min. 60000ms = 1min
         });
+        if (!video?.uri) {
+          Alert.alert(i18n.t("error"), i18n.t("recordederror"));
+          return;
+        }
         await MediaLibrary.saveToLibraryAsync(video?.uri!);
-      } catch (e) {
+      } catch (e: any) {
         console.error(e);
+        Alert.alert(i18n.t("error"), i18n.t("recordederror"));
       }
     }
   };
 
+  // Take a picture when the user presses the camera button
   const takePicture = async () => {
     if (camera.current) {
       try {
@@ -96,15 +104,21 @@ export default function RecordVideo() {
           quality: 1,
           exif: true,
         });
+        if (!photo?.uri) {
+          Alert.alert(i18n.t("error"), i18n.t("uploaderror"));
+          return;
+        }
         await MediaLibrary.saveToLibraryAsync(photo?.uri!);
-      } catch (e) {
+      } catch (e: any) {
         console.error(e);
+        Alert.alert(i18n.t("error"), i18n.t("uploaderror"));
       }
     }
   };
 
+  // Stop recording when the user presses the stop button
   const stopRecording = async () => {
-    if (camera.current) {
+    if (camera.current && isRecording) {
       await camera.current.stopRecording();
       setIsRecording(false);
     }
@@ -123,8 +137,7 @@ export default function RecordVideo() {
         style={StyleSheet.absoluteFill}
         facing={facing}
         ref={camera}
-        videoQuality="1080p"
-        pictureSize=""
+        videoQuality="720p"
         videoStabilizationMode="auto"
         active={isActive}
         enableTorch={torch}

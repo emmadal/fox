@@ -102,5 +102,11 @@
   "choosephotodesc": "Choisir une photo depuis la bibliothèque",
   "upload": "Envoyer",
   "select": "Choisir",
-  "or": "ou"
+  "or": "ou",
+  "error": "Erreur",
+  "recordingerrordesc": "Une erreur s'est produite. Veuillez essayer plus tard",
+  "recording": "Enregistrement",
+  "recorded": "Enregistré",
+  "recordeddesc": "Votre vidéo a été enregistrée avec succès",
+  "recordederror": "Échec de l'enregistrement de la vidéo"
 }

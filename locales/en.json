@@ -102,5 +102,11 @@
   "choosephotodesc": "Choose a photo from library",
   "upload": "Upload",
   "select": "Select",
-  "or": "or"
+  "or": "or",
+  "error": "Error",
+  "recordingerrordesc": "Something went wrong. Please try again later",
+  "recording": "Recording",
+  "recorded": "Recorded",
+  "recordeddesc": "Your video has been recorded successfully",
+  "recordederror": "Video recording failed"
 }
