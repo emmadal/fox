@@ -76,6 +76,10 @@ export function VideoPost({
         className="gap-8 flex-column absolute right-3 top-1/4"
         testID="actions"
       >
+        <TouchableOpacity testID="icon-settings">
+          <Icon name="more-horizontal" size={30} color="white" />
+        </TouchableOpacity>
+
         <TouchableOpacity
           className="flex-column items-center"
           testID="icon-heart"
@@ -106,24 +110,16 @@ export function VideoPost({
         </TouchableOpacity>
       </View>
 
-      <View
-        className="absolute top-3/4 right-5 w-full flex-row justify-end items-center mt-10"
-        testID="settings"
-      >
-        {sponsored && (
-          <View className="gap-2 flex-column w-full left-16">
-            <Button
-              text="Book Now"
-              onPress={() => console.log("Like")}
-              className="py-2 w-1/2 rounded-lg h-12 items-center"
-              testID="sponsored-button"
-            />
-          </View>
-        )}
-        <TouchableOpacity testID="icon-settings">
-          <Icon name="settings" size={25} color="white" />
-        </TouchableOpacity>
-      </View>
+      {sponsored && (
+        <View className="absolute top-3/4 right-5 w-full left-10">
+          <Button
+            text="Book Now"
+            onPress={() => console.log("Like")}
+            className="py-2 w-1/2 rounded-lg h-12 items-center justify-center"
+            testID="sponsored-button"
+          />
+        </View>
+      )}
     </View>
   );
 }

@@ -67,6 +67,7 @@ export default function HomeLayout() {
           },
         }}
       />
+      <Stack.Screen name="record-video" options={{ headerShown: false }} />
     </Stack>
   );
 }

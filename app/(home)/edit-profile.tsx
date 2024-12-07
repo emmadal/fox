@@ -111,7 +111,12 @@ const EditProfile = () => {
         </TouchableOpacity>
         {image && (
           <View className="flex-row items-center gap-7">
-            <Entypo name="arrow-long-right" size={35} color="green" />
+            <Entypo
+              name="forward"
+              size={27}
+              color="green"
+              className="animate-pulse"
+            />
             <Image
               source={{ uri: image }}
               cachePolicy="memory"
@@ -125,7 +130,7 @@ const EditProfile = () => {
               }}
             />
             <TouchableOpacity onPress={onRemoveImage}>
-              <Icon name="trash-outline" size={30} color="rgb(248 113 113)" />
+              <Icon name="trash-outline" size={27} color="rgb(248 113 113)" />
             </TouchableOpacity>
           </View>
         )}
