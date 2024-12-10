@@ -1,3 +1,4 @@
+import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useVideoPlayer, VideoView } from "expo-video";
 import { Image } from "expo-image";
@@ -15,9 +16,10 @@ interface VideoPostProps {
   sponsored: boolean;
   userAvatar: string;
   retweet: number;
+  openBottomSheet: () => void;
 }
 
-export function VideoPost({
+export default function VideoPost({
   username,
   caption,
   videoUrl,
@@ -27,6 +29,7 @@ export function VideoPost({
   sponsored,
   userAvatar,
   retweet,
+  openBottomSheet,
 }: VideoPostProps) {
   const player = useVideoPlayer(videoUrl, (player) => {
     player.loop = true;
@@ -72,6 +75,7 @@ export function VideoPost({
         contentFit="cover"
         testID="video-view"
       />
+
       <View
         className="gap-8 flex-column absolute right-3 top-1/4"
         testID="actions"
@@ -90,6 +94,7 @@ export function VideoPost({
         <TouchableOpacity
           className="flex-column items-center"
           testID="icon-message-circle"
+          onPress={openBottomSheet}
         >
           <Icon name="message-circle" size={25} color="white" />
           <Text className="text-white text-base">{comments}</Text>
