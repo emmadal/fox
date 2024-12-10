@@ -108,5 +108,20 @@
   "recording": "Enregistrement",
   "recorded": "Enregistré",
   "recordeddesc": "Votre vidéo a été enregistrée avec succès",
-  "recordederror": "Échec de l'enregistrement de la vidéo"
+  "recordederror": "Échec de l'enregistrement de la vidéo",
+  "writecomment": "Écrire un commentaire",
+  "like": "J'aime",
+  "likes": "J'aimes",
+  "reply": "Répondre",
+  "replies": "Réponses",
+  "comment": "Commentaire",
+  "comments": "Commentaires",
+  "share": "Partager",
+  "shared": "Partagé",
+  "sharedesc": "Votre publication a été partagée avec succès",
+  "shareerror": "Echec de la publication partagée",
+  "shareerrordesc": "Une erreur s'est produite. Veuillez essayer plus tard",
+  "sharenow": "Partager maintenant",
+  "sharepost": "Partager la publication",
+  "sharepostdesc": "Partagez cette publication avec vos amis"
 }
