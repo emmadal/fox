@@ -33,6 +33,15 @@ export default function HomeScreen() {
     ref.current?.expand();
   }, []);
 
+  const handleItemChange = useCallback(({ viewableItems }: any) => {
+    if (viewableItems.length > 0) {
+      const results = comment_users.filter(
+        (item) => item.videoId === viewableItems[0].item.id,
+      );
+      setComments(results);
+    }
+  }, []);
+
   return (
     <View className="flex-1 dark:bg-black">
       <Header />
@@ -50,12 +59,7 @@ export default function HomeScreen() {
           snapToAlignment="start"
           automaticallyAdjustContentInsets={true}
           contentInsetAdjustmentBehavior="automatic"
-          onViewableItemsChanged={({ viewableItems }) => {
-            const results = comment_users.filter(
-              (item) => item.videoId === viewableItems[0].item.id,
-            );
-            setComments(results);
-          }}
+          onViewableItemsChanged={handleItemChange}
         />
       )}
 

@@ -9,6 +9,7 @@ import {
 import { Image } from "expo-image";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import moment from "moment";
+import { blurash } from "@/constants/Colors";
 
 interface CommentProps {
   username: string;
@@ -35,6 +36,8 @@ export default function Comment({
           style={styles.avatar}
           contentFit="cover"
           className="mt-2"
+          onError={(error) => console.warn("Avatar load error:", error)}
+          placeholder={{ blurash }}
         />
       </Pressable>
       <View className="flex-1 flex-shrink" testID="comment-content">
