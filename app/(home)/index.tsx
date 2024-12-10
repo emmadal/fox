@@ -5,6 +5,9 @@ import {
   TouchableOpacity,
   AppState,
   useColorScheme,
+  TextInput,
+  Platform,
+  KeyboardAvoidingView,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { SAMPLE_VIDEOS } from "@/data/video";
@@ -16,6 +19,7 @@ import { useRouter } from "expo-router";
 import BottomSheet, { BottomSheetFlatList } from "@gorhom/bottom-sheet";
 import { comment_users } from "@/data/comments";
 import Comment from "@/components/Comment";
+import i18n from "@/i18n";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -81,6 +85,20 @@ export default function HomeScreen() {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <Comment {...item} />}
         />
+        <View className="flex-row items-center gap-5 px-5 ios:mb-12 my-2">
+          <TextInput
+            placeholder={i18n.t("writecomment")}
+            className="border border-1 dark:border-white border-gray-400 rounded-lg dark:bg-white bg-transparent  text-black h-14 px-3 text-lg w-[90%]"
+            maxLength={100}
+          />
+          <TouchableOpacity>
+            <Icon
+              name="send"
+              size={30}
+              color={colorScheme === "light" ? "black" : "white"}
+            />
+          </TouchableOpacity>
+        </View>
       </BottomSheet>
 
       {!isSheetOpen ? (

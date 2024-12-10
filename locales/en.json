@@ -108,5 +108,20 @@
   "recording": "Recording",
   "recorded": "Recorded",
   "recordeddesc": "Your video has been recorded successfully",
-  "recordederror": "Video recording failed"
+  "recordederror": "Video recording failed",
+  "writecomment": "Write a comment",
+  "like": "Like",
+  "likes": "Likes",
+  "reply": "Reply",
+  "replies": "Replies",
+  "comment": "Comment",
+  "comments": "Comments",
+  "share": "Share",
+  "shared": "Shared",
+  "sharedesc": "Your post has been shared successfully",
+  "shareerror": "Post sharing failed",
+  "shareerrordesc": "Something went wrong. Please try again later",
+  "sharenow": "Share now",
+  "sharepost": "Share post",
+  "sharepostdesc": "Share this post with your friends"
 }
