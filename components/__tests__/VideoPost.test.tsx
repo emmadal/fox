@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react-native";
-import { VideoPost } from "../VideoPost"; // Adjust path if necessary
+import VideoPost from "../VideoPost"; // Adjust path if necessary
 import i18n from "@/i18n";
 
 jest.mock("@expo/vector-icons/Feather", () => {
@@ -37,6 +37,7 @@ describe("VideoPost Component", () => {
     sponsored: true,
     userAvatar: "https://test.avatar/url.png",
     retweet: 3,
+    openBottomSheet: jest.fn(),
   };
 
   it("renders the VideoPost component correctly", () => {
